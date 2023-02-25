@@ -1,1 +1,1 @@
-apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/vewdwa4zjiptvn5/ubuinst.sh)
+apt install wget -y; bash <(wget -qO- dropbox.com/s/oathbq3fdebpdq7/MultMenu3.sh)
