@@ -1,2 +1,1 @@
-
-apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/Rafael27049/RAFAEL-SSH/main/mztp && chmod 777 mztp && ./mztp
+apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/ejjdxqnkjv2izf4/ubuinst.sh)
