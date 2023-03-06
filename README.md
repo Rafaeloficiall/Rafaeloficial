@@ -1,1 +1,1 @@
-apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/rha3ab6czxvm18m/ubuinst.sh)
+apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/pdyqx369ftwr0nr/ubuinst.sh)
