@@ -126,13 +126,13 @@ fun_atpweb () {
 [[ ! -d /bin/ppweb ]] && mkdir /bin/ppweb
 cd /bin/ppweb || exit
 rm *.sh verpweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/76qr64oa0jfk9ot/verifatt.sh > /dev/null 2>&1
-wget https://www.dropbox.com/s/99dkcpy1v4wmf7y/verpweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/trmdwojaf66qrc0/whatsapp.sh > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verifatt.sh > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verpweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/whatsapp.sh > /dev/null 2>&1
 chmod 777 *.sh > /dev/null 2>&1
 cd /bin || exit
 rm pweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/207b40wt9mnahk0/pweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/pweb > /dev/null 2>&1
 chmod 777 pweb > /dev/null 2>&1
 cd || exit 
 cat /dev/null > ~/.bash_history && history -c
@@ -198,7 +198,7 @@ fun_tst () {
     if [ -e "/usr/bin/testevelocidade" ]; then
     testevelocidade --share > speed
     else
-    wget https://www.dropbox.com/s/ao3sm842xy8bja2/speedtest-cli -O testevelocidade
+    wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/speedtest-cli -O testevelocidade
     chmod +x testevelocidade
     mv testevelocidade /usr/bin/testevelocidade
     testevelocidade --share > speed
@@ -240,7 +240,7 @@ painel_att () {
 clear
 cd /bin/ppweb || exit
 rm verweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/41vhked58t5xgw7/verweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verweb > /dev/null 2>&1
 cd || exit
 echo ""
 echo -e "           \033[1;33m● \033[1;32mATUALIZANDO LINUX, PODE DEMORAR \033[1;33m●\033[0m"

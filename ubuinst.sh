@@ -192,16 +192,16 @@ function install_continue {
 function install_continue2 {
 cd /bin || exit
 rm pweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/207b40wt9mnahk0/pweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/pweb > /dev/null 2>&1
 chmod 777 pweb > /dev/null 2>&1
 clear
 [[ ! -d /bin/ppweb ]] && mkdir /bin/ppweb
 cd /bin/ppweb || exit
 rm *.sh ver* > /dev/null 2>&1
-wget https://www.dropbox.com/s/76qr64oa0jfk9ot/verifatt.sh > /dev/null 2>&1
-wget https://www.dropbox.com/s/99dkcpy1v4wmf7y/verpweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/41vhked58t5xgw7/verweb > /dev/null 2>&1
-wget https://www.dropbox.com/s/trmdwojaf66qrc0/whatsapp.sh > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verifatt.sh > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verpweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/verweb > /dev/null 2>&1
+wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/whatsapp.sh > /dev/null 2>&1
 verp=$(sed -n '1 p' /bin/ppweb/verpweb| sed -e 's/[^0-9]//ig') &>/dev/null
 verw=$(sed -n '1 p' /bin/ppweb/verweb| sed -e 's/[^0-9]//ig') &>/dev/null
 echo -e "$verp" >/bin/ppweb/attpweb

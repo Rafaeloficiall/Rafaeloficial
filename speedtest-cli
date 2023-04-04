@@ -1702,7 +1702,7 @@ def parse_args():
         'speedtest.net.\n'
         '------------------------------------------------------------'
         '--------------\n'
-        'https://www.dropbox.com/s/ao3sm842xy8bja2/speedtest-cli')
+        'https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/speedtest-cli')
 
     parser = ArgParser(description=description)
     # Give optparse.OptionParser an `add_argument` method for
