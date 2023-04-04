@@ -334,7 +334,7 @@ dpkg-reconfigure --frontend noninteractive tzdata > /dev/null 2>&1
 clear
 echo -e "\E[44;1;37m    INSTALANDO PAINEL    \E[0m"
 echo ""
-echo -e "RAFAELSSH" | figlet | boxes -d stone -p a0v0 | lolcat
+echo -e "PAINEL RAFAEL SSH" | figlet | boxes -d stone -p a0v0 | lolcat
 echo -e "                              \033[1;31mBy @Rafaelssh\033[1;36m" | lolcat
 echo ""
 chave=$(curl -sSL "raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/chave") &>/dev/null
