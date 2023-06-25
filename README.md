@@ -1,20 +1,30 @@
+# BEM VINDO 👍
+
 # SSH-PLUS
 
-# @Rafael ssh
+# gustavossh
 
-PROJETO
+*PROJETO EM ANDAMENTO...
 
 
+# Modo de instalação
 # 👇👽👍
-Só joga na máquina e deixar instalar
 
-• atualiza sistema
-
-• desativa Ipv6
-
+• Primeiro coloque esse comando para atualizar sua maquina
+```
+apt-get update -y; apt-get upgrade -y; 
+```
 • instala recursos e o script
+```
+apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPLUS/main/ssh-plus)
 
+```
 
-apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/ssh-plus)
+# 👇SENHA ROOT👇
 
-# PRO
+# ALTERE E DEFINA SUA NOVA SENHA ROOT 
+
+sudo -i
+```
+bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPLUS/main/senharoot.sh)
+```
