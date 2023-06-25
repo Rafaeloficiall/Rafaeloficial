@@ -60,5 +60,5 @@ sysctl -p -f /etc/sysctl.d/70-disable-ipv6.conf
 
 # - Execulta instalador
 [[ -e Plus ]] && rm Plus
-apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPLUS/main/Plus)
+apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Plus)
  -O Plus; chmod +x Plus; ./Plus

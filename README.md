@@ -2,7 +2,7 @@
 
 # SSH-PLUS
 
-# gustavossh
+# Rafaelssh
 
 *PROJETO EM ANDAMENTO...
 
@@ -16,7 +16,7 @@ apt-get update -y; apt-get upgrade -y;
 ```
 • instala recursos e o script
 ```
-apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPLUS/main/ssh-plus)
+apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/ssh-plus)
 
 ```
 
@@ -26,5 +26,5 @@ apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPL
 
 sudo -i
 ```
-bash <(wget -qO- raw.githubusercontent.com/gustavossh/SSHPLUS/main/senharoot.sh)
+bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/senharoot.sh)
 ```
