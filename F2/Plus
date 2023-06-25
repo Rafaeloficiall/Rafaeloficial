@@ -87,7 +87,7 @@ otimize_python() {
     update-alternatives --set python3 /usr/bin/python3.6
 }
 figlet "SSH-PRO" | lolcat
-echo "SCRIPT EM DESENVOLVIMENTO !!"
+echo "SCRIPT SSH-PRO !!"
 echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
 echo ""
 echo ""
@@ -146,7 +146,7 @@ if [[ "$resposta" = '1' ]]; then
     [[ -f "$HOME/usuarios.db" ]] && {
         clear
         figlet "SSH-PRO" | lolcat
-        echo "SCRIPT EM DESENVOLVIMENTO !!" 
+        echo "SCRIPT SSH-PRO !!" 
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
         echo -e "\033[1;33mOPA DETECTAMOS..."
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
