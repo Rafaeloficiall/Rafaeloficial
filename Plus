@@ -85,7 +85,7 @@ echo -e "\n\033[1;37mINICIANDO. \033[0m" ; rm $_Ink/list > /dev/null 2>&1; wget 
     rm versao* >/dev/null 2>&1
     wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficia/main/Install/versao >/dev/null 2>&1
     rm v2raymanager >/dev/null 2>&1
-    wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficia/main/Modulos/v2raymanager >/dev/null 2>&1
+    wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficia/SSHPLUS/main/Modulos/v2raymanager >/dev/null 2>&1
     wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficia/main/Modulos/botteste.sh >/dev/null 2>&1
     chmod 777 v2raymanager >/dev/null 2>&1
     chmod 777 botteste.sh >/dev/null 2>&1
@@ -108,7 +108,7 @@ echo -e "\n\033[1;37mINICIANDO. \033[0m" ; rm $_Ink/list > /dev/null 2>&1; wget 
     [[ -f "$HOME/usuarios.db" ]] && {
         clear
         figlet "RAFAEL SSH" | lolcat
-        echo "SCRIPT RAFAEL SSH ULTIMATE" 
+        echo "SCRIPT RAFAEL SSH PREMIUM" 
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
         echo -e "\033[1;33mOPA DETECTAMOS..."
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
