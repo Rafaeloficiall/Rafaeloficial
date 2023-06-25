@@ -86,14 +86,14 @@ rm -rf $HOME/speed
 
 installpweb () {
 clear
-echo -e "\033[38;5;82mINTALANDO PAINEL NITY WEB \033[0m"
+echo -e "\033[38;5;82mINTALANDO PAINEL RAFAEL WEB \033[0m"
 sleep 2s
 apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/lskv2rz3podf4yv/nityoripro.sh)
 }
 
 sincpweb () {
 clear
-echo -e "\033[38;5;82mSINCRONIZANDO PAINEL NITY WEB \033[0m"
+echo -e "\033[38;5;82mSINCRONIZANDO PAINEL RAFAEL WEB \033[0m"
 sleep 4s
 apt install wget -y; bash <(wget -qO- https://www.dropbox.com/s/x93q20yzvof8tgt/sincpainel.sh)
 }
@@ -262,7 +262,7 @@ uteis() {
 while true $x != "ok"
 do
 clear
-echo -e "NITYSSH WEB PREMIUM" | figlet | boxes -d stone -p a0v0 | lolcat
+echo -e "SSH WEB PREMIUM" | figlet | boxes -d stone -p a0v0 | lolcat
 echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
 echo -e "\033[0;34m┃\E[44;1;37m                FERRAMENTAS              \E[0m\033[0;34m┃"
 echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
@@ -407,7 +407,7 @@ _onlin=$(printf '%-5s' "$_onli")
 _userexp=$(printf '%-5s' "$_expuser")
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
-echo -e "\033[0;34m┃\E[46;1;37m                   ⇱ SSHPLUS NITY ⇲                      \E[0m\033[0;34m┃"
+echo -e "\033[0;34m┃\E[46;1;37m                   ⇱ RAFAEL-SSH ⇲                      \E[0m\033[0;34m┃"
 echo -e "\033[0;34m┠━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┨\033[0m"
 echo -e "\033[0;34m┃\033[1;32mSISTEMA               MEMÓRIA RAM          PROCESSADOR      \033[0;34m┃"
 echo -e "\033[0;34m┃\033[1;31mOS: \033[1;37m$_system    \033[1;31mTotal:\033[1;37m$_ram     \033[1;31mNucleos: \033[1;37m$_core\033[0m   \033[0;34m┃"
@@ -434,7 +434,7 @@ echo -e "\033[0;34m┃\033[1;31m[\033[1;36m10\033[1;31m] \033[1;37m• \033[1;33
 echo -e "\033[0;34m┃\033[1;31m[\033[1;36m11\033[1;31m] \033[1;37m• \033[1;33mSPEEDTEST\033[1;31m                   [\033[1;36m27\033[1;31m] \033[1;37m• \033[1;33mCHECKUSERS        \033[0;34m┃"
 echo -e "\033[0;34m┃\033[1;31m[\033[1;36m12\033[1;31m] \033[1;37m• \033[1;33mBANNER\033[1;31m                      [\033[1;36m28\033[1;31m] \033[1;37m• \033[1;33mPAINEL WEB       \033[0;34m┃"
 echo -e "\033[0;34m┃\033[1;31m[\033[1;36m13\033[1;31m] \033[1;37m• \033[1;33mTRAFEGO\033.                     \033[1;37mSEU IP 👉 \033[38;5;82m$IP\033[0;34m ┃"
-echo -e "\033[0;34m┃\033[1;31m[\033[1;36m14\033[1;31m] \033[1;37m• \033[1;33mOTIMIZAR                    \033[1;36mTELEGRAM 😎\033  \033[1;37m@NITYSSHH  \033[0;34m┃"
+echo -e "\033[0;34m┃\033[1;31m[\033[1;36m14\033[1;31m] \033[1;37m• \033[1;33mOTIMIZAR                    \033[1;36mCRIADO POR \033  \033[1;37m@RAFAEL SSH  \033[0;34m┃"
 echo -e "\033[0;34m┃\033[1;31m[\033[1;36m15\033[1;31m] \033[1;37m• \033[1;33mBACKUP\033[1;31m                      [\033[1;36mAT\033[1;31m] $var01 \033[1;32mATUALIZAR SCRIPT  \033[0;34m┃"
 echo -e "\033[0;34m┃\033[1;31m[\033[1;36m16\033[1;31m] \033[1;37m• \033[1;33mCONSUMO\033[1;31m                     {\033[1;36mRE\033[1;31m} \033[1;37m• \033[1;31mREMOVER SCRIPT    \033[0;34m┃"
 echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
