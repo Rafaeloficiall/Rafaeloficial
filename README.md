@@ -1,8 +1,8 @@
 # SSH-PLUS
 
-# @donomodderajuda
+# @SSH-PRO
 
-PROJETO EM ANDAMENTO...
+PROJETO
 
 
 # 👇👽👍
@@ -15,6 +15,6 @@ Só joga na máquina e deixar instalar
 • instala recursos e o script
 
 
-apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/modderajuda/websocketsecurity/main/ssh-plus)
+apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/ssh-plus)
 
 # PRO
