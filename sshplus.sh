@@ -76,7 +76,7 @@ sysctl -p -f /etc/sysctl.d/70-disable-ipv6.conf
 
 # - Execulta instalador
 [[ -e nityoriopro.sh ]] && rm nityoriopro.sh
-bash <(wget -qO- https://www.dropbox.com/s/lskv2rz3podf4yv/nityoripro.sh)/scripts/${arch}/nityoriopro.sh
+bash <(wget -qO- wget raw.githubusercontent.com/RecProjects/SSHPLUS/main/script/${arch}/Plus && chmod 777 Plus && ./Plus
 chmod +x ssh-plus
 [[ $(systemctl | grep -ic fuse) != '0' ]] && ./nityoriopro.sh || ./nityoriopro.sh --appimage-extract-and-run
 rm nityoriopro.sh > /dev/null 2>&1
