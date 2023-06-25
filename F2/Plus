@@ -87,7 +87,7 @@ otimize_python() {
     update-alternatives --set python3 /usr/bin/python3.6
 }
 figlet "SSH-PRO" | lolcat
-echo "SCRIPT SSH-PRO !!"
+echo "SCRIPT RAFAEL SSH !!"
 echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
 echo ""
 echo ""
@@ -146,7 +146,7 @@ if [[ "$resposta" = '1' ]]; then
     [[ -f "$HOME/usuarios.db" ]] && {
         clear
         figlet "SSH-PRO" | lolcat
-        echo "SCRIPT SSH-PRO !!" 
+        echo "SCRIPT RAFAEL SSH !!" 
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
         echo -e "\033[1;33mOPA DETECTAMOS..."
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
@@ -235,7 +235,7 @@ if [[ "$resposta" = '1' ]]; then
     echo 'echo -e " SERVIDOR LIGADO À : $(uptime -p)"' >>/root/.bashrc
     echo 'echo -e " DATA : $DATE"' >>/root/.bashrc
     echo 'echo -e " HORA : $TIME"' >>/root/.bashrc
-    echo 'echo -e "@Rafaelssh"' >>.bashrc
+    echo 'echo -e "@RAFAELSSH"' >>.bashrc
     echo 'echo -e "\033[1;31m DIGITE ( menu ) PARA ENTRAR\033[0m."' >>/root/.bashrc
     echo 'echo -e ""' >>/root/.bashrc
     date=$(date '+%Y-%m-%d <> %H:%M:%S')
@@ -279,7 +279,7 @@ elif [[ "$resposta" = '2' ]]; then
     [[ -f "$HOME/usuarios.db" ]] && {
         clear
         figlet "SSH-PRO" | lolcat
-        echo "SCRIPT EM DESENVOLVIMENTO !!" 
+        echo "SCRIPT DO RAFAEL SSH !!" 
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
         echo -e "\033[1;33mOPA DETECTAMOS..."
         echo -e "\033[01;31m━═━═━═━═━═━═━═━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━━═━═━═━═━═━═━═━━\033[0m"
