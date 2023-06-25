@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@Rafaelssh
+#	@rafaelssh
 #====================================================
 _lvk=$(wget -qO- https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficia/main/Modulos/versao)
 IP=$(wget -qO- ipv4.icanhazip.com)
