@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@donomodderajuda 
+#	@rafaelssh 
 #====================================================
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
@@ -465,7 +465,7 @@ SCOLOR='\033[0m'
         fun_v2rayins() {
 			clear
 	        v2rayinst(){
-	            source <(curl -sL https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Modulos/v2ray)
+	            source <(curl -sL https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Modulos/v2ray)
                     sleep 6
 	        }
 	        if netstat -tunlp |grep v2ray 1> /dev/null 2> /dev/null; then
