@@ -764,26 +764,27 @@ SCOLOR='\033[0m'
 				echo -e "\n\033[1;32mCONFIGURANDO O SSL TUNNEL !\033[0m"
 				echo ""
 				ssl_conf() {
-					echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:${portssl}\naccept = ${porta}" >/etc/stunnel/stunnel.conf
+					echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:$portssl\naccept = ${porta}" >/etc/stunnel/stunnel.conf
 				}
 				fun_bar 'ssl_conf'
 				echo -e "\n\033[1;32mCRIANDO CERTIFICADO !\033[0m"
 				echo ""
 				ssl_certif() {
-					crt='EC'
-					openssl genrsa -out key.pem 2048 >/dev/null 2>&1
-					(
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-					) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
-					cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
-					rm key.pem cert.pem >/dev/null 2>&1
+					#crt='EC'
+					#openssl genrsa -out key.pem 2048 >/dev/null 2>&1
+					#(
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
+					#cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
+					#rm key.pem cert.pem >/dev/null 2>&1
 					sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+					cd /etc/stunnel && wget https://raw.githubusercontent.com/Niltonjuniorxd/SSHPLUSnzx/nzxs/Install/stunnel.pem && cd $HOME
 				}
 				fun_bar 'ssl_certif'
 				echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
