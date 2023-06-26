@@ -1,14 +1,11 @@
 #!/bin/bash
-#====================================================
-#	@rafaelssh 
-#====================================================
+clear
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
 scor='\033[0m'
 GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 SCOLOR='\033[0m'
-[[ $(awk -F" " '{print $2}' /usr/lib/licence) == '@KIRITO_SSH' ]] && {
 	ram1=$(free -h | grep -i mem | awk {'print $2'})
 	ram2=$(free -h | grep -i mem | awk {'print $4'})
 	ram3=$(free -h | grep -i mem | awk {'print $3'})
@@ -55,6 +52,18 @@ SCOLOR='\033[0m'
 		done
 	}
 
+	slow_setup() {
+		[[ -e "/bin/slowdns" ]] && {
+			slowdns
+		} || {
+			cd $HOME
+			wget https://raw.githubusercontent.com/Niltonjuniorxd/SSHPLUSnzx/nzxs/Slowdns/install -o /dev/null
+			chmod 777 install
+			./install
+		}
+
+	}
+
 	inst_sqd() {
 		if netstat -nltp | grep 'squid' 1>/dev/null 2>/dev/null; then
 			echo -e "\E[41;1;37m            REMOVER SQUID PROXY              \E[0m"
@@ -90,7 +99,9 @@ SCOLOR='\033[0m'
 			}
 		else
 			clear
-			echo -e "\E[44;1;37m              INSTALADOR SQUID                \E[0m"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m            INSTALADOR SQUID             \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 			echo ""
 			IP=$(wget -qO- ipv4.icanhazip.com)
 			echo -ne "\033[1;32mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"
@@ -280,20 +291,23 @@ SCOLOR='\033[0m'
 
 	fun_squid() {
 		[[ "$(netstat -nplt | grep -c 'squid')" = "0" ]] && inst_sqd
-		echo -e "\E[44;1;37m          GERENCIAR SQUID PROXY           \E[0m"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m          GERENCIAR SQUID PROXY          \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 		[[ "$(netstat -nplt | grep -c 'squid')" != "0" ]] && {
 			sqdp=$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)
-			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$sqdp"
+			echo -e "\033[0;34m╼ \033[1;32mPORTAS\033[1;37m: \033[1;37m$sqdp"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
 			VarSqdOn="REMOVER SQUID PROXY"
 		} || {
 			VarSqdOn="INSTALAR SQUID PROXY"
 		}
-		echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33m$VarSqdOn \033[1;31m
-[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mADICIONAR PORTA \033[1;31m
-[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA\033[1;31m
-[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-		echo ""
-		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33m$VarSqdOn                \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mADICIONAR PORTA                    \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA                      \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR                             \033[0;34m┃"
+		echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+		echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 		read x
 		clear
 		case $x in
@@ -324,18 +338,20 @@ SCOLOR='\033[0m'
 			clear
 			[[ $(netstat -nltp | grep -c 'dropbear') != '0' ]] && dpbr=$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs) || sqdp="\033[1;31mINDISPONIVEL"
 			if ps x | grep "limiter" | grep -v grep 1>/dev/null 2>/dev/null; then
-				stats='\033[1;32m◉ '
+				stats='\033[1;32m✓ '
 			else
-				stats='\033[1;31m○ '
+				stats='\033[1;31m✕ '
 			fi
-			echo -e "\E[44;1;37m              GERENCIAR DROPBEAR               \E[0m"
-			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$dpbr"
-			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mLIMITER DROPBEAR $stats\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA DROPBEAR\033[0m"
-			echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER DROPBEAR\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m           GERENCIAR DROPBEAR            \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+			echo -e "\033[0;34m╼ \033[1;32mPORTAS\033[1;37m: \033[1;37m$dpbr"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mLIMITER DROPBEAR $stats\033[0m                \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA DROPBEAR\033[0m             \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER DROPBEAR\033[0m                   \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                             \033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
 			read resposta
 			if [[ "$resposta" = '1' ]]; then
@@ -405,7 +421,9 @@ SCOLOR='\033[0m'
 			fi
 		else
 			clear
-			echo -e "\E[44;1;37m           INSTALADOR DROPBEAR              \E[0m"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m           INSTALADOR DROPBEAR           \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 			echo -e "\n\033[1;33mVC ESTA PRESTES A INSTALAR O DROPBEAR !\033[0m\n"
 			echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
 			read resposta
@@ -462,41 +480,40 @@ SCOLOR='\033[0m'
 			}
 		fi
 	}
-        fun_v2rayins() {
-			clear
-	        v2rayinst(){
-	            source <(curl -sL https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Modulos/v2ray)
-                    sleep 6
-	        }
-	        if netstat -tunlp |grep v2ray 1> /dev/null 2> /dev/null; then
-	            echo -e "\E[44;1;37m            INSTALADOR V2RAY             \E[0m"
-	            echo -e "\n${YELLOW}V2RAY JÁ ESTÁ INSTALADO\nDESEJA REINSTALAR? ${SCOLOR}\n"
-	            echo -ne "${GREEN}DESEJA CONTINUAR A REINSTALAÇÃO ? ${YELLOW}[s/n]:${SCOLOR} "
-	            read resp
-	            [[ "$resp" != @(s|sim|S|SIM) ]] && {
-	                echo -e "\n${RED}Retornando...${SCOLOR}"
-	                sleep 2
-	                conexao
-	            }
-	            v2rayinst
-	        else
-	            echo -e "\E[44;1;37m            INSTALADOR V2RAY             \E[0m"
-	            echo -e "\n${YELLOW}ESTEJA CIENTE QUE ESSE METODO É INSTAVEL\nFIQUE CIENTE DOS RISCOS ! ${SCOLOR}\n"
-	            echo -ne "${GREEN}DESEJA CONTINUAR A INSTALACAO ? ${YELLOW}[s/n]:${SCOLOR} "
-	            read resp
-	            [[ "$resp" != @(s|sim|S|SIM) ]] && {
-	                echo -e "\n${RED}Retornando...${SCOLOR}"
-	                sleep 2
-	                conexao
-	            }
-	            v2rayinst
-            fi
-        }
-    	fun_chisel() {
+	fun_v2rayins() {
+		clear
+		v2rayinst() {
+			source <(curl -sL https://raw.githubusercontent.com/Niltonjuniorxd/SSHPLUSnzx/nzxs/Modulos/v2ray)
+			sleep 6
+		}
+		if netstat -tunlp | grep v2ray 1>/dev/null 2>/dev/null; then
+			echo -e "\E[44;1;37m            INSTALADOR V2RAY             \E[0m"
+			echo -e "\n${YELLOW}V2RAY JÁ ESTÁ INSTALADO\nDESEJA REINSTALAR? ${SCOLOR}\n"
+			echo -ne "${GREEN}DESEJA CONTINUAR A REINSTALAÇÃO ? ${YELLOW}[s/n]:${SCOLOR} "
+			read resp
+			[[ "$resp" != @(s|sim|S|SIM) ]] && {
+				echo -e "\n${RED}Retornando...${SCOLOR}"
+				sleep 2
+				conexao
+			}
+			v2rayinst
+		else
+			echo -e "\E[44;1;37m            INSTALADOR V2RAY             \E[0m"
+			echo -e "\n${YELLOW}ESTEJA CIENTE QUE ESSE METODO É INSTAVEL\nFIQUE CIENTE DOS RISCOS ! ${SCOLOR}\n"
+			echo -ne "${GREEN}DESEJA CONTINUAR A INSTALACAO ? ${YELLOW}[s/n]:${SCOLOR} "
+			read resp
+			[[ "$resp" != @(s|sim|S|SIM) ]] && {
+				echo -e "\n${RED}Retornando...${SCOLOR}"
+				sleep 2
+				conexao
+			}
+			v2rayinst
+		fi
+	}
+	fun_chisel() {
 		clear
 		echo -e "\E[44;1;37m            GERENCIAR CHISEL             \E[0m"
 		echo ""
-
 
 		[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
 			sks='\033[1;32mON'
@@ -504,11 +521,11 @@ SCOLOR='\033[0m'
 		} || {
 			sks='\033[1;31mOFF'
 		}
-        [[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
-				chiselsts="\033[1;32m◉ "
-			} || {
-				chiselsts="\033[1;31m○ "
-			}
+		[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
+			chiselsts="\033[1;32m✓ "
+		} || {
+			chiselsts="\033[1;31m✕ "
+		}
 		echo ""
 		echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mATIVAR CHISEL $chiselsts \033[0m"
 		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREINICIAR CHISEL\033[0m"
@@ -523,9 +540,9 @@ SCOLOR='\033[0m'
 				echo ""
 				fun_chiseloff() {
 					docker stop chisel
-                    docker rm chisel
+					docker rm chisel
 					docker.io stop chisel
-                    docker.io rm chisel
+					docker.io rm chisel
 
 				}
 				echo -e "\033[1;32mDESATIVANDO CHISEL\033[1;33m"
@@ -536,23 +553,23 @@ SCOLOR='\033[0m'
 				sleep 3
 				fun_chisel
 			else
-                clear
-                fun_installdocker() {
-                    _pacotes=("docker" "docker.io")
-                    for _prog in ${_pacotes[@]}; do
-                    apt install $_prog -y
-                    done
-                }
-                echo -e "\n${YELLOW}ESTEJA CIENTE QUE ESSE METODO É INSTAVEL\nPODE OU NÃO FUNCIONAR NA SUA MAQUINA\nFIQUE CIENTE DOS RISCOS ! ${SCOLOR}\n"
-                echo -ne "${GREEN}DESEJA CONTINUAR A INSTALACAO ? ${YELLOW}[s/n]:${SCOLOR} "
-                read resp
-                [[ "$resp" != @(s|sim|S|SIM) ]] && {
-                    echo -e "\n${RED}Retornando...${SCOLOR}"
-                    sleep 2
-                    conexao
-                }
-                echo -e "\n\033[1;32mSuportado Ubuntu 16+\033[1;33m"
-                echo -e "\n\033[1;32mINSTALANDO O CHISEL !\033[1;33m"
+				clear
+				fun_installdocker() {
+					_pacotes=("docker" "docker.io")
+					for _prog in ${_pacotes[@]}; do
+						apt install $_prog -y
+					done
+				}
+				echo -e "\n${YELLOW}ESTEJA CIENTE QUE ESSE METODO É INSTAVEL\nPODE OU NÃO FUNCIONAR NA SUA MAQUINA\nFIQUE CIENTE DOS RISCOS ! ${SCOLOR}\n"
+				echo -ne "${GREEN}DESEJA CONTINUAR A INSTALACAO ? ${YELLOW}[s/n]:${SCOLOR} "
+				read resp
+				[[ "$resp" != @(s|sim|S|SIM) ]] && {
+					echo -e "\n${RED}Retornando...${SCOLOR}"
+					sleep 2
+					conexao
+				}
+				echo -e "\n\033[1;32mSuportado Ubuntu 16+\033[1;33m"
+				echo -e "\n\033[1;32mINSTALANDO O CHISEL !\033[1;33m"
 				echo ""
 				fun_bar 'fun_installdocker'
 				clear
@@ -568,66 +585,68 @@ SCOLOR='\033[0m'
 					fun_chisel
 				}
 				verif_ptrs $porta
-                clear
-                echo -ne "\033[1;32mNome do usuário:\033[1;37m ";read username
-                [[ -z $username ]] && {
-                    echo -e "\n${cor1}Nome de usuário vazio ou invalido!${scor}\n"
-                    fun_chisel
-                }
-                [[ ${username} != ?(+|-)+([a-zA-Z0-9]) ]] && {
-                    echo -e "\n${cor1}Você digitou um nome de usuário inválido!${scor}"
-                    echo -e "${cor1}Não use espaços, acentos ou caracteres especiais!${scor}\n"
-                    fun_chisel
-                }
-                sizemin=$(echo ${#username})
-                [[ $sizemin -lt 2 ]] && {
-                    echo -e "\n${cor1}Você digitou um nome de usuário muito curto${scor}"
-                    echo -e "${cor1}use no mínimo dois caracteres!${scor}\n"
-                    fun_chisel
-                }
-                sizemax=$(echo ${#username})
-                [[ $sizemax -gt 10 ]] && {
-                    echo -e "\n${cor1}Você digitou um nome de usuário muito grande"
-                    echo -e "${cor1}use no máximo 10 caracteres!${scor}\n"
-                    fun_chisel
-                }
-                echo -ne "\033[1;32mSenha:\033[1;37m ";read password
-                [[ -z $password ]] && {
-                    echo -e "\n${cor1}Senha vazia ou invalida!${scor}\n"
-                    fun_chisel 
-                }
-                sizepass=$(echo ${#password})
-                [[ $sizepass -lt 4 ]] && {
-                    echo -e "\n${cor1}Senha curta!, use no mínimo 4 caracteres${scor}\n"
-                    fun_chisel        
-                }
-                echo -e "\n\033[1;32mCONFIGURANDO CHISEL !\033[0m"
+				clear
+				echo -ne "\033[1;32mNome do usuário:\033[1;37m "
+				read username
+				[[ -z $username ]] && {
+					echo -e "\n${cor1}Nome de usuário vazio ou invalido!${scor}\n"
+					fun_chisel
+				}
+				[[ ${username} != ?(+|-)+([a-zA-Z0-9]) ]] && {
+					echo -e "\n${cor1}Você digitou um nome de usuário inválido!${scor}"
+					echo -e "${cor1}Não use espaços, acentos ou caracteres especiais!${scor}\n"
+					fun_chisel
+				}
+				sizemin=$(echo ${#username})
+				[[ $sizemin -lt 2 ]] && {
+					echo -e "\n${cor1}Você digitou um nome de usuário muito curto${scor}"
+					echo -e "${cor1}use no mínimo dois caracteres!${scor}\n"
+					fun_chisel
+				}
+				sizemax=$(echo ${#username})
+				[[ $sizemax -gt 10 ]] && {
+					echo -e "\n${cor1}Você digitou um nome de usuário muito grande"
+					echo -e "${cor1}use no máximo 10 caracteres!${scor}\n"
+					fun_chisel
+				}
+				echo -ne "\033[1;32mSenha:\033[1;37m "
+				read password
+				[[ -z $password ]] && {
+					echo -e "\n${cor1}Senha vazia ou invalida!${scor}\n"
+					fun_chisel
+				}
+				sizepass=$(echo ${#password})
+				[[ $sizepass -lt 4 ]] && {
+					echo -e "\n${cor1}Senha curta!, use no mínimo 4 caracteres${scor}\n"
+					fun_chisel
+				}
+				echo -e "\n\033[1;32mCONFIGURANDO CHISEL !\033[0m"
 				echo ""
-                fun_inichisel() {
-                    docker run --name chisel -p $porta:$porta -d --restart always jpillora/chisel server -p $porta --socks5 --key supersecret --auth "$username:$password"
-                    docker.io run --name chisel -p $porta:$porta -d --restart always jpillora/chisel server -p $porta --socks5 --key supersecret --auth "$username:$password"
-                }
-                fun_bar 'fun_inichisel'
-                clear
-                echo -e "\n\033[1;32mCHISEL INSTALADO COM SUCESSO !\033[1;31m PORTA: \033[1;33m${porta}\033[0m"
+				fun_inichisel() {
+					docker run --name chisel -p $porta:$porta -d --restart always jpillora/chisel server -p $porta --socks5 --key supersecret --auth "$username:$password"
+					docker.io run --name chisel -p $porta:$porta -d --restart always jpillora/chisel server -p $porta --socks5 --key supersecret --auth "$username:$password"
+				}
+				fun_bar 'fun_inichisel'
+				clear
+				echo -e "\n\033[1;32mCHISEL INSTALADO COM SUCESSO !\033[1;31m PORTA: \033[1;33m${porta}\033[0m"
 				sleep 3
 				clear
 				fun_chisel
-            fi
-        elif [[ "$resposta" = '2' ]]; then
-            clear
-            echo -e "\n\033[1;32mREINICIANDO CHISEL !\033[1;33m"
+			fi
+		elif [[ "$resposta" = '2' ]]; then
+			clear
+			echo -e "\n\033[1;32mREINICIANDO CHISEL !\033[1;33m"
 			echo ""
-            fun_attchisel() {
-                docker restart chisel
-                docker.io restart chisel
-            }
-            fun_attchisel
-            clear
-            echo -e "\n\033[1;32mCHISEL REINICIANDO COM SUCESSO !\033[1;33m"
-            sleep 1
-            fun_chisel
-        elif [[ "$resposta" = '0' ]]; then
+			fun_attchisel() {
+				docker restart chisel
+				docker.io restart chisel
+			}
+			fun_attchisel
+			clear
+			echo -e "\n\033[1;32mCHISEL REINICIANDO COM SUCESSO !\033[1;33m"
+			sleep 1
+			fun_chisel
+		elif [[ "$resposta" = '0' ]]; then
 			echo ""
 			echo -e "\033[1;31mRetornando...\033[0m"
 			sleep 1
@@ -638,30 +657,31 @@ SCOLOR='\033[0m'
 			sleep 1
 			fun_socks
 		fi
-    }
+	}
 	inst_ssl() {
 		if netstat -nltp | grep 'stunnel4' 1>/dev/null 2>/dev/null; then
 			[[ $(netstat -nltp | grep 'stunnel4' | wc -l) != '0' ]] && sslt=$(netstat -nplt | grep stunnel4 | awk {'print $4'} | awk -F ":" {'print $2'} | xargs) || sslt="\033[1;31mINDISPONIVEL"
-			echo -e "\E[44;1;37m              GERENCIAR SSL TUNNEL               \E[0m"
-			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$sslt"
-			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA SSL TUNNEL\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER SSL TUNNEL\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m           GERENCIAR SSL TUNNEL          \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+			echo -e "\033[0;34m╼ \033[1;32mPORTAS\033[1;37m: \033[1;37m$sslt"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA SSL TUNNEL\033[0m           \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER SSL TUNNEL\033[0m                 \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                             \033[0;34m┃"
+			echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+			echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 			read resposta
 			echo ""
 			[[ "$resposta" = '1' ]] && {
-				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m "
+				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;37m?\033[1;37m "
 				read porta
 				echo ""
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
-					sleep 2
 					clear
-					fun_conexao
+					inst_ssl
 				}
 				verif_ptrs $porta
 				echo -e "\033[1;32mALTERANDO PORTA SSL TUNNEL!"
@@ -674,98 +694,106 @@ SCOLOR='\033[0m'
 				fun_bar 'service stunnel4 restart' '/etc/init.d/stunnel4 restart'
 				echo ""
 				netstat -nltp | grep 'stunnel4' >/dev/null && echo -e "\033[1;32mPORTA ALTERADA COM SUCESSO !" || echo -e "\033[1;31mERRO INESPERADO!"
-				sleep 3.5s
 				clear
-				fun_conexao
+				inst_ssl
 			}
 			[[ "$resposta" = '2' ]] && {
 				echo -e "\033[1;32mREMOVENDO O  SSL TUNNEL !\033[0m"
 				del_ssl() {
+					pkill stunnel4
 					service stunnel4 stop
 					apt-get remove stunnel4 -y
 					apt-get autoremove stunnel4 -y
 					apt-get purge stunnel4 -y
 					rm -rf /etc/stunnel/stunnel.conf
 					rm -rf /etc/default/stunnel4
-					rm -rf /etc/stunnel/cert.cert
-					rm -rf /etc/stunnel/key.key
+					rm -rf /etc/stunnel/stunnel.pem
 				}
 				echo ""
 				fun_bar 'del_ssl'
 				echo ""
 				echo -e "\033[1;32mSSL TUNNEL REMOVIDO COM SUCESSO!\033[0m"
-				sleep 3
+				inst_ssl
+			} || {
+				echo -e "\033[1;31mRetornando...\033[0m"
 				fun_conexao
 			}
 		else
 			clear
-			echo -e "\E[44;1;37m              INSTALAR SSL TUNNEL               \E[0m"
-			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL PADRÃO\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL WEBSOCKET\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
-			read resposta
-			echo ""
-			if [[ "$resposta" = '1' ]]; then
-				portssl='22'
-			elif [[ "$resposta" = '2' ]]; then
-				portssl='80'
-			elif [[ "$resposta" = '0' ]]; then
-				echo -e "\033[1;31mRetornando...\033[0m"
-				sleep 3
-				fun_conexao
-			else
-				echo ""
-				echo -e "\033[1;31mOpcao invalida !\033[0m"
-				sleep 1
-				inst_ssl
-			fi
 			clear
-			echo -e "\E[44;1;37m           INSTALADOR SSL TUNNEL             \E[0m"
-			echo -e "\n\033[1;33mVC ESTA PRESTES A INSTALAR O SSL TUNNEL !\033[0m"
-			echo ""
-			echo -ne "\033[1;32mDESEJA CONTINUAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m           INSTALAR SSL TUNNEL           \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+		echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL PADRÃO\033[0m         \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL WEBSOCKET\033[0m      \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                             \033[0;34m┃" 
+		echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+		echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 			read resposta
-			[[ "$resposta" = 's' ]] && {
-				echo -e "\n\033[1;33mDEFINA UMA PORTA PARA O SSL TUNNEL !\033[0m"
+			echo ""
+            if [[ "$resposta" = '1' ]]; then
+                portssl='22'
+            elif [[ "$resposta" = '2' ]]; then     
+                portssl='80'
+            elif [[ "$resposta" = '0' ]]; then
+				echo -e "\033[1;31mRetornando...\033[0m"
+				sleep 1
+				fun_conexao
+            else
+			echo ""
+			echo -e "\033[1;31mOpcao invalida !\033[0m"
+			inst_ssl
+		fi
+            clear
+			echo -e "\E[44;1;37m           INSTALADOR SSL TUNNEL             \E[0m"
+			echo -e "\n\033[1;37mVC ESTA PRESTES A INSTALAR O SSL TUNNEL !\033[0m"
+			{
 				echo ""
 				read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 443 porta
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
-					sleep 3
 					clear
-					fun_conexao
-				}
+					inst_ssl
+					}
 				verif_ptrs $porta
-				echo -e "\n\033[1;32mINSTALANDO O SSL TUNNEL !\033[1;33m"
-				echo ""
-				fun_bar 'apt-get update -y' 'apt-get install stunnel4 -y'
+				apt-get install stunnel4 -y
+				echo -e "client = no\n[SSL]\ncert = /etc/stunnel/stunnel.pem\naccept = 443 \nconnect = 127.0.0.1:80" > /etc/stunnel/stunnel.conf
+				openssl genrsa -out stunnel.key 2048 > /dev/null 2>&1
+				(echo "" ; echo "" ; echo "" ; echo "" ; echo "" ; echo "" ; echo "@cloudflare" )|openssl req -new -key stunnel.key -x509 -days 1000 -out stunnel.crt 
+				cat stunnel.crt stunnel.key > stunnel.pem 
+				mv stunnel.pem /etc/stunnel/
+				sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+				service stunnel4 restart 
+				rm -rf /etc/ger-frm/stunnel.crt 
+				rm -rf /etc/ger-frm/stunnel.key
+				rm -rf /root/stunnel.crt
+				rm -rf /root/stunnel.key
 				echo -e "\n\033[1;32mCONFIGURANDO O SSL TUNNEL !\033[0m"
 				echo ""
 				ssl_conf() {
-					echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:${portssl}\naccept = ${porta}" >/etc/stunnel/stunnel.conf
+					echo -e "cert = /etc/stunnel/stunnel.pem\nclient = no\nsocket = a:SO_REUSEADDR=1\nsocket = l:TCP_NODELAY=1\nsocket = r:TCP_NODELAY=1\n\n[stunnel]\nconnect = 127.0.0.1:$portssl\naccept = ${porta}" >/etc/stunnel/stunnel.conf
 				}
 				fun_bar 'ssl_conf'
 				echo -e "\n\033[1;32mCRIANDO CERTIFICADO !\033[0m"
 				echo ""
 				ssl_certif() {
-					crt='EC'
-					openssl genrsa -out key.pem 2048 >/dev/null 2>&1
-					(
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-						echo $crt
-					) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
-					cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
-					rm key.pem cert.pem >/dev/null 2>&1
+					#crt='EC'
+					#openssl genrsa -out key.pem 2048 >/dev/null 2>&1
+					#(
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
+					#cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
+					#rm key.pem cert.pem >/dev/null 2>&1
 					sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+					cd /etc/stunnel && wget https://raw.githubusercontent.com/Niltonjuniorxd/SSHPLUSnzx/nzxs/Install/stunnel.pem && cd $HOME
 				}
 				fun_bar 'ssl_certif'
 				echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
@@ -776,37 +804,18 @@ SCOLOR='\033[0m'
 					/etc/init.d/stunnel4 restart
 				}
 				fun_bar 'fun_finssl' 'service stunnel4 restart'
-				echo -e "\n\033[1;32mSSL TUNNEL INSTALADO COM SUCESSO !\033[1;31m PORTA: \033[1;33m$porta\033[0m"
+				echo -e "\n\033[1;32mSSL TUNNEL INSTALADO COM SUCESSO !\033[1;31m PORTA: \033[1;37m$porta\033[0m"
 				sleep 1
 				clear
-				echo -e "Corrigindo SSL CLARO"
-				cd /etc/stunnel/
-				rm -rf stunnel.conf
-				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/cert
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/key
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/stunnel
-				mv cert cert.pem
-				mv key key.pem
-				mv stunnel stunnel.conf
-				chmod 777 cert.pem
-				chmod 777 key.pem
-				chmod 777 stunnel.conf
-				service stunnel4 restart
-				cd $HOME
-				clear
-				echo -e "Corrigido"
-				sleep 2
-				fun_conexao
+				inst_ssl
 			} || {
 				echo -e "\n\033[1;31mRetornando...\033[0m"
-				sleep 2
+				sleep 1
 				clear
-				fun_conexao
+				inst_ssl
 			}
 		fi
 	}
-
 	fun_openvpn() {
 		if readlink /proc/$$/exe | grep -qs "dash"; then
 			echo "Este script precisa ser executado com bash, não sh"
@@ -870,27 +879,28 @@ SCOLOR='\033[0m'
 
 				opnp=$(cat /etc/openvpn/server.conf | grep "port" | awk {'print $2'})
 				[[ -d /var/www/html/openvpn ]] && {
-					ovpnweb=$(echo -e "\033[1;32m◉ ")
+					ovpnweb=$(echo -e "\033[1;32m✓ ")
 				} || {
-					ovpnweb=$(echo -e "\033[1;31m○ ")
+					ovpnweb=$(echo -e "\033[1;31m✕ ")
 				}
 				if grep "duplicate-cn" /etc/openvpn/server.conf >/dev/null; then
-					mult=$(echo -e "\033[1;32m◉ ")
+					mult=$(echo -e "\033[1;32m✓ ")
 				else
-					mult=$(echo -e "\033[1;31m○ ")
+					mult=$(echo -e "\033[1;31m✕ ")
 				fi
-				echo -e "\E[44;1;37m          GERENCIAR OPENVPN           \E[0m"
-				echo ""
-				echo -e "\033[1;33mPORTA\033[1;37m: \033[1;32m$opnp"
-				echo ""
-				echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA"
-				echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER OPENVPN"
-				echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mOVPN VIA LINK $ovpnweb"
-				echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mMULTILOGIN OVPN $mult"
-				echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mALTERAR HOST DNS"
-				echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
-				echo ""
-				echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+				echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+				echo -e "\033[0;34m┃\E[44;1;37m            GERENCIAR OPENVPN            \E[0m\033[0;34m┃"
+				echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+				echo -e "\033[0;34m╼ \033[1;32mPORTA\033[1;37m: \033[1;37m$opnp"
+				echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA                      \033[0;34m┃"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER OPENVPN                    \033[0;34m┃"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mOVPN VIA LINK $ovpnweb                   \033[0;34m┃"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mMULTILOGIN OVPN $mult                 \033[0;34m┃"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mALTERAR HOST DNS                   \033[0;34m┃"
+				echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR                             \033[0;34m┃"
+				echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+				echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 				read option
 				case $option in
 				1)
@@ -1216,8 +1226,9 @@ SCOLOR='\033[0m'
 			done
 		} || {
 			clear
-			echo -e "\E[44;1;37m              INSTALADOR OPENVPN               \E[0m"
-			echo ""
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m           INSTALADOR OPENVPN            \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 			echo -e "\033[1;33mRESPONDA AS QUESTOES PARA INICIAR A INSTALACAO"
 			echo ""
 			echo -ne "\033[1;32mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"
@@ -1287,9 +1298,9 @@ SCOLOR='\033[0m'
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Install/EasyRSA-3.0.1.tgz"
+				wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/Niltonjuniorxd/SSHPLUSnzx/raw/nzxs/Install/EasyRSA-3.0.1.tgz"
 				[[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
-					wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Install/EasyRSA-3.0.1.tgz"
+					wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/Niltonjuniorxd/SSHPLUSnzx/raw/nzxs/Install/EasyRSA-3.0.1.tgz"
 				}
 				tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
 				mv ~/EasyRSA-3.0.1/ /etc/openvpn/
@@ -1436,17 +1447,14 @@ exit 0' >$RCLOCAL
 			if [[ "$IP" != "$IP2" ]]; then
 				IP="$IP2"
 			fi
-			[[ $(grep -wc 'open.py' /etc/autostart) != '0' ]] && pt_proxy=$(grep -w 'open.py' /etc/autostart| cut -d' ' -f6) || pt_proxy=80
+			[[ $(grep -wc 'open.py' /etc/autostart) != '0' ]] && pt_proxy=$(grep -w 'open.py' /etc/autostart | cut -d' ' -f6) || pt_proxy=80
 			cat <<-EOF >/etc/openvpn/client-common.txt
-				# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
 				client
 				dev tun
 				proto $PROTOCOL
 				sndbuf 0
 				rcvbuf 0
-				remote /SSHPLUS? $porta
-				#payload "HTTP/1.1 [lf]CONNECT HTTP/1.1[lf][lf]|[lf]."
-				http-proxy $IP $pt_proxy
+				remote 127.0.0.1 $porta
 				resolv-retry 5
 				nobind
 				persist-key
@@ -1479,29 +1487,28 @@ exit 0' >$RCLOCAL
 
 	fun_socks() {
 		clear
-		echo -e "\E[44;1;37m            GERENCIAR PROXY SOCKS             \E[0m"
-		echo ""
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m          GERENCIAR PROXY SOCKS          \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 		[[ $(netstat -nplt | grep -wc 'python') != '0' ]] && {
 			sks='\033[1;32mON'
-			echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
+			echo -e "\033[0;34m╼ \033[1;32mPORTAS\033[1;37m: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
 		} || {
 			sks='\033[1;31mOFF'
 		}
-		[[ $(screen -list | grep -wc 'proxy') != '0' ]] && var_sks1="\033[1;32m◉" || var_sks1="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'ws') != '0' ]] && var_sks2="\033[1;32m◉" || var_sks2="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'ws2') != '0' ]] && var_sks3="\033[1;32m◉" || var_sks3="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'openpy') != '0' ]] && sksop="\033[1;32m◉" || sksop="\033[1;31m○"
-		echo ""
-		echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m"
-		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET $var_sks2 \033[0m"
-		echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET SECURITY$var_sks3 \033[0m"
-		echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m"
-		echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m"
-		echo -e "\033[1;31m[\033[1;36m6\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS SOCKS SSH\033[0m"
-        echo -e "\033[1;31m[\033[1;36m7\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS WEBSOCKET\033[0m"
-		echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-		echo ""
-		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+		[[ $(screen -list | grep -wc 'proxy') != '0' ]] && var_sks1="\033[1;32m✓" || var_sks1="\033[1;31m✕"
+		[[ $(screen -list | grep -wc 'ws') != '0' ]] && var_sks2="\033[1;32m✓" || var_sks2="\033[1;31m✕"
+		[[ $(screen -list | grep -wc 'openpy') != '0' ]] && sksop="\033[1;32m✓" || sksop="\033[1;31m✕"
+		echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m                       \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET $var_sks2 \033[0m                       \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m                   \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m                        \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS SOCKS SSH\033[0m           \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m6\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS WEBSOCKET\033[0m           \033[0;34m┃"
+		echo -e "\033[0;34m┃\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                             \033[0;34m┃"
+		echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+		echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 		read resposta
 		if [[ "$resposta" = '1' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
@@ -1558,10 +1565,7 @@ exit 0' >$RCLOCAL
 				sleep 3
 				fun_socks
 			fi
-
-
-
-        elif [[ "$resposta" = '2' ]]; then
+		elif [[ "$resposta" = '2' ]]; then
 			if ps x | grep -w wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				echo -e "\E[41;1;37m             WEBSOCKET              \E[0m"
@@ -1587,8 +1591,7 @@ exit 0' >$RCLOCAL
 				clear
 				echo -e "\E[44;1;37m             WEBSOCKET              \E[0m"
 				echo ""
-				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
-				read porta
+				read -p "$(echo -e "\033[1;32mQUAL PORTA DESEJA UTILIZAR? \033[1;37m")" -e -i 80 porta
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
@@ -1616,87 +1619,7 @@ exit 0' >$RCLOCAL
 				sleep 3
 				fun_socks
 			fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-elif [[ "$resposta" = '3' ]]; then
-		clear
-		if ps x | grep -w WebSocket | grep -v grep 1>/dev/null 2>/dev/null; then
-		echo -e "\E[41;1;37m          WEBSOCKET SECURITY              \E[0m"
-				echo ""
-				fun_wsswsocksoff() { 
-					pkill WebSocket
-					for pidproxy in $(screen -ls | grep ".ws" | awk {'print $1'}); do
-						screen -r -S "$WebSocket" -X quit
-					done
-					[[ $(grep -wc "WebSocket" /etc/autostart) != '0' ]] && {
-						sed -i '/WebSocket/d' /etc/autostart
-					}
-					sleep 1
-					screen -wipe >/dev/null
-				}
-				echo -e "\033[1;32mDESATIVANDO O WEBSOCKET SECURITY\033[1;33m"
-				echo ""
-				fun_bar 'fun_wsswsocksoff'
-				echo ""
-				echo -e "\033[1;32mWEBSOCKET SECURITY DESATIVADO COM SUCESSO!\033[1;33m"
-				
-				fun_socks
-			else
-		echo -e "\E[44;1;37m          WEBSOCKET SECURITY              \E[0m"
-				echo ""
-				echo "$(echo -e "\033[1;32mPORTA UTILIZADA 80 \033[1;37m")"
-				[[ -z "porta" ]] && {
-					echo ""
-					echo -e "\033[1;31mPorta invalida!"
-					
-				fun_socks
-				}
-				verif_ptrs $porta
-				fun_iniwssocks() {
-					sleep 1
-					screen -dmS novoWS /etc/SSHPlus/WebSocket 
-					[[ $(grep -wc "WebSocket" /etc/autostart) = '0' ]] && {
-						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:80" >>/etc/autostart
-					} || {
-						sed -i '/WebSocket/d' /etc/autostart
-						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:80" >>/etc/autostart
-					}
-				}
-				echo ""
-				echo -e "\033[1;32mINICIANDO O WEBSOCKET SECURITY\033[1;33m"
-				echo ""
-				fun_bar 'fun_iniwssocks'
-				echo ""
-				echo -e "\033[1;32WEBSOCKET SECURITY ATIVADO COM SUCESSO\033[1;33m"
-				
-				fun_socks
-			fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-		elif [[ "$resposta" = '4' ]]; then
+		elif [[ "$resposta" = '3' ]]; then
 			if ps x | grep -w open.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				echo -e "\E[41;1;37m            SOCKS OPENVPN             \E[0m"
@@ -1756,7 +1679,7 @@ elif [[ "$resposta" = '3' ]]; then
 				sleep 3
 				fun_socks
 			fi
-		elif [[ "$resposta" = '5' ]]; then
+		elif [[ "$resposta" = '4' ]]; then
 			if ps x | grep proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				sockspt=$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)
 				clear
@@ -1793,7 +1716,7 @@ elif [[ "$resposta" = '3' ]]; then
 				sleep 2
 				fun_socks
 			fi
-		elif [[ "$resposta" = '6' ]]; then
+		elif [[ "$resposta" = '5' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				msgsocks=$(cat /etc/SSHPlus/proxy.py | grep -E "MSG =" | awk -F = '{print $2}' | cut -d "'" -f 2)
@@ -1873,7 +1796,7 @@ elif [[ "$resposta" = '3' ]]; then
 						screen -dmS proxy python /etc/SSHPlus/proxy.py $_Ptsks
 						rm /tmp/Pt_sks
 					fi
-                }
+				}
 				echo ""
 				echo -e "\033[1;32mREINICIANDO PROXY SOCKS!"
 				echo ""
@@ -1888,7 +1811,7 @@ elif [[ "$resposta" = '3' ]]; then
 				sleep 2
 				fun_socks
 			fi
-        		elif [[ "$resposta" = '7' ]]; then
+		elif [[ "$resposta" = '6' ]]; then
 			if ps x | grep -w wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				msgsocks=$(cat /etc/SSHPlus/wsproxy.py | grep -E "MSG =" | awk -F = '{print $2}' | cut -d "'" -f 2)
@@ -1956,8 +1879,8 @@ elif [[ "$resposta" = '3' ]]; then
 				echo -e "\033[1;32mALTERANDO STATUS!"
 				echo ""
 				fun_bar 'fun_msgsocks'
-                restartwssocks() {
-                    if ps x | grep wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
+				restartwssocks() {
+					if ps x | grep wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 						echo -e "$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)" >/tmp/Pt_wssks
 						for pidproxy in $(screen -ls | grep ".ws" | awk {'print $1'}); do
 							screen -r -S "$pidproxy" -X quit
@@ -2123,158 +2046,138 @@ elif [[ "$resposta" = '3' ]]; then
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-system=$(cat /etc/issue.net)
-date=$(date '+%Y-%m-%d <> %H:%M:%S')
-echo -e "\033[1;37m $system                $date"
-echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                      CONEXAO                      \033[1;33m \033[0m\033[01;31m║"
-echo -e "\033[0;31m║\033[0m"
-			echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\E[44;1;37m             MODO DE CONEXAO             \E[0m\033[0;34m┃"
+			echo -e "\033[0;34m╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
+			echo -e "\033[0;34m╼ \033[1;32mOPENSSH\033[1;31m: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m✓ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
-				sts8="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mCHISEL\033[1;32m: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				sts8="\033[1;32m✓ "
 			} || {
-				sts8="\033[1;31m○ "
+				sts8="\033[1;31m✕ "
 			}
-			[[ "$(ps x | grep 'slow_dns' | grep -v 'grep'|wc -l)" != '0' ]] && {
-				sts9="\033[1;32m◉ "
+			[[ "$(ps x | grep 'slowdns' | grep -v 'grep' | wc -l)" != '0' ]] && {
+				sts9="\033[1;32m✓ "
 			} || {
-				sts9="\033[1;31m○ "
-			}            
+				sts9="\033[1;31m✕ "
+			}
 			[[ "$(netstat -tlpn | grep 'sslh' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
-				sts7="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mSSLH\033[1;31m: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				sts7="\033[1;32m✓ "
 			} || {
-				sts7="\033[1;31m○ "
+				sts7="\033[1;31m✕ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'openvpn' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mOPENVPN: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
-				sts5="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mOPENVPN\033[1;31m: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				sts5="\033[1;32m✓ "
 			} || {
-				sts5="\033[1;31m○ "
+				sts5="\033[1;31m✕ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'python' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
-				sts4="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mPROXY SOCKS\033[1;31m: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				sts4="\033[1;32m✓ "
 			} || {
-				sts4="\033[1;31m○ "
+				sts4="\033[1;31m✕ "
 			}
 			[[ -e "/etc/stunnel/stunnel.conf" ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSSL TUNNEL \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
-				sts3="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mSSL TUNNEL\033[1;31m: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				sts3="\033[1;32m✓ "
 			} || {
-				sts3="\033[1;31m○ "
+				sts3="\033[1;31m✕ "
 			}
 			[[ "$(netstat -tlpn | grep 'dropbear' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mDROPBEAR \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
-				sts2="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mDROPBEAR\033[1;31m: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
+				sts2="\033[1;32m✓ "
 			} || {
-				sts2="\033[1;31m○ "
+				sts2="\033[1;31m✕ "
 			}
 			[[ "$(netstat -tlpn | grep 'squid' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m║\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
-				sts1="\033[1;32m◉ "
+				echo -e "\033[0;34m╼ \033[1;32mSQUID\033[1;31m: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
+				sts1="\033[1;32m✓ "
 			} || {
-				sts1="\033[1;31m○ "
+				sts1="\033[1;31m✕ "
 			}
 			[[ "$(netstat -tunlp | grep 'trojan-go' | wc -l)" != '0' ]] && {
-				trojansts="\033[1;32m◉ "
+				trojansts="\033[1;32m✓ "
 			} || {
-				trojansts="\033[1;31m○ "
+				trojansts="\033[1;31m✕ "
 			}
 			[[ "$(netstat -tunlp | grep 'v2ray' | wc -l)" != '0' ]] && {
-				xv2ray="\033[1;32m◉ "
+				xv2ray="\033[1;32m✓ "
 			} || {
-				xv2ray="\033[1;31m○ "
+				xv2ray="\033[1;31m✕ "
 			}
-			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
-			echo -e "\033[01;31m║\033[0m"
-			echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENVPN \033[01;31m $sts5\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mPROXY SOCKS \033[01;31m $sts4\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 06 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSL TUNNEL \033[01;31m $sts3\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 07 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSLH MULTIPLEX \033[01;31m $sts7\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 08 •\033[1;34m]\033[1;37m ➩  \033[1;33mCHISEL \033[01;31m $sts8\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 09 •\033[1;34m]\033[1;37m ➩  \033[1;33mSLOWDNS \033[01;31m $sts9\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 10 •\033[1;34m]\033[1;37m ➩  \033[1;33mV2RAY \033[01;31m $xv2ray\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 11 •\033[1;34m]\033[1;37m ➩  \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 12 •\033[1;34m]\033[1;37m ➩  \033[1;33mWEBSOCKET - Corretor \033[01;31m $sts3\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 13 •\033[1;34m]\033[1;37m ➩  \033[1;33mLIMPAR V2RAY \033[01;31m\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 14 •\033[1;34m]\033[1;37m ➩  \033[1;33mMENU APACHE  \033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 15 •\033[1;34m]\033[1;37m ➩  \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 00 •\033[1;34m]\033[1;37m ➩  \033[1;33mSAIR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
-echo -e "\033[01;31m║\033[0m"
-			echo -e "\033[0;31m╠━━═━═━═━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━━═━═━═━═━═━\033[0m"
+			echo -e "\033[0;34m╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮\033[0m"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mOPENSSH $sts6                        \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mSQUID PROXY $sts1                    \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mDROPBEAR $sts2                       \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mOPENVPN $sts5                        \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mPROXY SOCKS $sts4                    \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;33mSSL TUNNEL $sts3                     \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;33mSSLH MULTIPLEX $sts7                 \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m08\033[1;31m] \033[1;37m• \033[1;33mCHISEL $sts8                         \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m09\033[1;31m] \033[1;37m• \033[1;33mSLOWDNS $sts9                        \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m10\033[1;31m] \033[1;37m• \033[1;33mV2RAY $xv2ray                          \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m11\033[1;31m] \033[1;37m• \033[1;33mTROJAN-GO $trojansts                      \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m12\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET - Corretor $sts3                      \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m13\033[1;31m] \033[1;37m• \033[1;33mMENU APACHE2                       \033[0;34m┃"
+			echo -e "\033[0;34m┃\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR \033[1;32m<\033[1;33m<\033[1;31m<                        \033[0;34m┃"
+			echo -e "\033[0;34m╰┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\033[0m"
 			tput civis
-			echo -ne "\033[1;31m╰━━━━━━━━❪\033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : ";
+			echo -ne "\033[0;34m ╰╼\033[1;32mOQUE DESEJA FAZER \033[1;37m?\033[1;31m?\033[1;37m: "
 			read x
 			tput cnorm
 			clear
 			case $x in
 			1 | 01)
-			fun_openssh
-			;;
+				fun_openssh
+				;;
 			2 | 02)
-			fun_squid
-			;;
+				fun_squid
+				;;
 			3 | 03)
-			fun_drop
-			;;
+				fun_drop
+				;;
 			4 | 04)
-			fun_openvpn
-			;;
+				fun_openvpn
+				;;
 			5 | 05)
-			fun_socks
-			;;
-			6 | 06) 
-			inst_ssl
-			;;
+				fun_socks
+				;;
+			6 | 06)
+				inst_ssl
+				;;
 			7 | 07)
-			fun_sslh
-			;;
+				fun_sslh
+				;;
 			8 | 08)
-			fun_chisel
-			;;
+				fun_chisel
+				;;
 			9 | 09)
-			slowdns
-			;;
+				slow_setup
+				;;
 			10 | 10)
-			v2raymanager
-			exit
-			;;
+				v2raymanager
+				exit
+				;;
 			11 | 11)
-			trojan-go
-			;;
+				trojan-go
+				;;
 			12 | 12)
-			websocket.sh
-			;;
-			13 | 13)
-			echo -e "\E[44;1;37m             LIMPAR V2RAY              \E[0m"
-			echo -e "\033[1;31mESSA FUNÇÃO É PARA LIBERAR MEMÓRIA EM DISCO COMO MEMÓRIA RAM \033[1;33m \033[1;32\033[0m"
-			echo -e "\033[1;31mTenha em mente que ao executá-lo, se você tivesse estatísticas de consumo, \033[1;33m \033[1;32\033[0m"
-			echo -e "\033[1;31meles serão zerados, não há perda de configurações ou do usuário \033[1;33m \033[1;32\033[0m"
-			v2ray clean
-			echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
-			;;
-			14 | 14)
-			clear
-			apache2menu
-			;;
-			15 | 15)
-			clear
-			menu
-			;;
+				websocket.sh
+				;;
+				13 | 13)
+				apache2menu
+				;;
 			0 | 00)
-			clear
-			exit
-			;;
+				menu
+				;;
 			*)
-			echo -e "\033[1;31mOpcao invalida !\033[0m"
-			sleep 2
-			;;
+				echo -e "\033[1;31mOpcao invalida !\033[0m"
+				sleep 2
+				;;
 			esac
 		done
 	}
