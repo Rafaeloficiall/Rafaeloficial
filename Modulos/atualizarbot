@@ -1,6 +1,0 @@
-#!/bin/bash
-    clear
-    echo -e "\033[1;37m ATUALIZAR DEPENDÊNCIAS ️\033[0m"
-    sleep 2s
-unzip TBotPlus_Cliente_*.zip && cd TBotPlus; chmod +x TerminusBot.sh && ./TerminusBot.sh
-botzap
