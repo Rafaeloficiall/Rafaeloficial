@@ -795,9 +795,9 @@ SCOLOR='\033[0m'
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/cert
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/key
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/Install/stunnel
+				wget https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Install/cert
+				wget https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Install/key
+				wget https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/Install/stunnel
 				mv cert cert.pem
 				mv key key.pem
 				mv stunnel stunnel.conf
@@ -809,11 +809,6 @@ SCOLOR='\033[0m'
 				clear
 				echo -e "Corrigido"
 				sleep 2
-				fun_conexao
-			} || {
-				echo -e "\n\033[1;31mRetornando...\033[0m"
-				sleep 2
-				clear
 				fun_conexao
 			}
 		fi
