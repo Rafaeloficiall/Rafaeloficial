@@ -1,5 +1,5 @@
 #!/bin/bash
-### BY ALFAINTERNET ###
+### BY PLEXYS ###
 rm -f install
 rm -f Plus
 rm -f install*
