@@ -58,7 +58,7 @@ echo -e "\033[0;31m║\033[0m"
                     sleep 0.1
                 } || {
                     cd $HOME
-                    wget http://186.233.119.193/_S_script/badvpn-udpgw -o /dev/null
+                    wget https://raw.githubusercontent.com/brendelvalim/scriptvps/main/ScripVpsGringa/badvpn/badvpn-udpgw -o /dev/null
                     mv -f $HOME/badvpn-udpgw /bin/badvpn-udpgw
                     chmod 777 /bin/badvpn-udpgw
                 }
