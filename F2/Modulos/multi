@@ -10,7 +10,7 @@ SINCRONIZARPAINEL () {
       bash <(wget -qO- sshplus.xyz/scripts/utilitarios/syncpainel/inst)
 }
 SLOWDNS () {
-      wget http://186.233.119.193/_S_script/install; chmod +x install; ./install
+      wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/SlowDNS/install; chmod +x install; ./install
 }
 PAINELV20 () {
     multi2
