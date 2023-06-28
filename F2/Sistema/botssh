@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-#--------@softystar-----------#
+#--------@Modderajuda-----------#
 source ShellBot.sh
 touch lista
 [[ -z $1 ]] && {
@@ -57,7 +57,7 @@ rm -rf /etc/SSHPlus/userteste/$usuario.sh" > /etc/SSHPlus/userteste/$usuario.sh
     echo ${callback_query_from_id} >> lista
     # - ENVIA O SSH
     ShellBot.sendMessage --chat_id ${callback_query_message_chat_id} \
-    --text "$(echo -e "✅ 🤩<b>LOGIN CRIADO</b>🤩 \r\n❗<b>SALVE O SEU LOGIN</b>❗ \r\n\r\n🚻<b>USUARIO:</b> <code>$usuario</code>\r\n🔐<b>SENHA:</b> <code>$senha</code>\r\n❌<b>LIMITE:</b> 1\r\n<b>⏰VALIDADE:</b> $dias Dias \r\n\r\n<b>BAIXE O APLICATIVO MAIS RECENTE NO NOSSO GRUPO E FIQUE POR DENTRO DAS NOVIDADES</b>\r\n<b>ACESSE O NOSSO GRUPO</b> @softystar\r\n<b>ACESSE O NOSSO CANAL</b> @softystar")" \
+    --text "$(echo -e "✅ 🤩<b>LOGIN CRIADO</b>🤩 \r\n❗<b>SALVE O SEU LOGIN</b>❗ \r\n\r\n🚻<b>USUARIO:</b> <code>$usuario</code>\r\n🔐<b>SENHA:</b> <code>$senha</code>\r\n❌<b>LIMITE:</b> 1\r\n<b>⏰VALIDADE:</b> $dias Dias \r\n\r\n<b>BAIXE O APLICATIVO MAIS RECENTE NO NOSSO GRUPO E FIQUE POR DENTRO DAS NOVIDADES</b>\r\n<b>ACESSE O NOSSO GRUPO</b> @modderajudagrupo\r\n<b>ACESSE O NOSSO CANAL</b> @modderajudacanal")" \
     --parse_mode html
     return 0
 }
@@ -67,7 +67,7 @@ buylogin() {
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
         --text "♻️ AGUARDE..."
     ShellBot.sendMessage --chat_id ${callback_query_message_chat_id} \
-    --text "$(echo -e "✅ 😍<b>MUITO OBRIGADO POR CONFIAR EM MEU TRABALHO</b>😍\r\n<b>FAÇA O PIX DE 10$ REAIS E ENVIE O COMPROVANTE PARA</b>👉 @softystar 👈\r\n<b>👇 CHAVE PIX 👇</b>\r\n<b>aae3eba8-f1f8-4911-a26b-0f02d611317c</b> aae3eba8-f1f8-4911-a26b-0f02d611317c ")" \
+    --text "$(echo -e "✅ 😍<b>MUITO OBRIGADO POR CONFIAR EM MEU TRABALHO</b>😍\r\n<b>FAÇA O PIX DE 10$ REAIS E ENVIE O COMPROVANTE PARA</b>👉 @donomodderajuda 👈\r\n<b>👇 CHAVE PIX 👇</b>\r\n<b>aae3eba8-f1f8-4911-a26b-0f02d611317c</b> aae3eba8-f1f8-4911-a26b-0f02d611317c ")" \
     --parse_mode html
     return 0
 }
@@ -77,7 +77,7 @@ enviarapp() {
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
         --text "♻️ ENVIANDO APLICATIVO, AGUARDE..."
     ShellBot.sendDocument --chat_id ${callback_query_message_chat_id} \
-        --document "@/root/softystar.apk" \
+        --document "@/root/moddervpn.apk" \
     return 0
 }
     
@@ -86,7 +86,7 @@ buymod() {
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
         --text "♻️ AGUARDE..."
     ShellBot.sendMessage --chat_id ${callback_query_message_chat_id} \
-    --text "$(echo -e "✅ 😍<b>COMPRE MODS DO CONECTA4G POR UM PREÇO ACESSÍVEL, MODS LINDOS E LEVES</b>😍\r\n<b>ACESSE O NOSSO CANAL E ESCOLHA O MODELO</b>👉 @softystar\r\n<b>CHAME NO PV O CRIADOR DOS MELHORES MODS</b>👉 @softystar")" \
+    --text "$(echo -e "✅ 😍<b>COMPRE MODS DO CONECTA4G POR UM PREÇO ACESSÍVEL, MODS LINDOS E LEVES</b>😍\r\n<b>ACESSE O NOSSO CANAL E ESCOLHA O MODELO</b>👉 @modderajudacanal\r\n<b>CHAME NO PV O CRIADOR DOS MELHORES MODS</b>👉 @donomodderajuda")" \
     --parse_mode html
     return 0
 }
