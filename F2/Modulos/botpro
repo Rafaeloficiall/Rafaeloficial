@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-#--------@Scottssh-----------#
+#--------@kiritosshxd-----------#
 source ShellBot2.sh
 ShellBot.init --token "2104982015:AAF3cchdGHRKvKCjG_z_Xd9c7Ip9lof6KCE" --monitor --flush
 ShellBot.username
@@ -97,7 +97,7 @@ enviarapp() {
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
         --text "♻️ ENVIANDO APLICATIVO, AGUARDE..."
     ShellBot.sendDocument --chat_id ${callback_query_message_chat_id} \
-        --document "@/root/app.apk" \
+        --document "@/root/CONECT4G.apk" \
     return 0
 }
 
