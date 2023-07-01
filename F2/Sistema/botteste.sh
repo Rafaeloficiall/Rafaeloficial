@@ -10,7 +10,7 @@
     echo -e "\033[1;32mINICIANDO BOT TESTE \033[0m\n"
     cd $HOME/BOT
     rm -rf $HOME/BOT/botssh
-    wget https://raw.githubusercontent.com/Plexys-SOFT/f3/main/F2/Sistema/botssh >/dev/null 2>&1
+    wget https://raw.githubusercontent.com/TH30R10N/PR0/main/Sistema/botssh >/dev/null 2>&1
     chmod 777 botssh
     echo ""
     sleep 1
