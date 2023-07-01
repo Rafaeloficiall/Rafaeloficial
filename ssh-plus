@@ -1,9 +1,8 @@
 #!/bin/bash
 clear
 #--------------------------
-# SCRIPR SSHPLUS MANAGER
-# DEV: @CRAZY_VPN
-# CANAL TELEGRAM: @SSHPLUS
+# SCRIPt SCOTT PRO
+# CANAL TELEGRAM: @scottssh
 #--------------------------
 
 # - Cores
@@ -13,7 +12,7 @@ SCOLOR='\033[0m'
 
 # - Verifica Execucao Como Root
 [[ "$EUID" -ne 0 ]] && {
-    echo -e "${RED}[x] VC PRECISA EXECULTAR COMO USUARIO ROOT !${SCOLOR}"
+    echo -e "{RED}[x] VC PRECISA EXECULTAR COMO USUARIO ROOT !{SCOLOR}"
     exit 1
 }
 
@@ -22,7 +21,7 @@ case "$(uname -m)" in
     'amd64' | 'x86_64')
         arch='64'
         ;;
-    'aarch64')
+    'aarch64' | 'armv8')
         arch='arm64'
         ;;
     *)
@@ -40,24 +39,9 @@ if grep -qs "ubuntu" /etc/os-release; then
     }
 elif [[ -e /etc/debian_version ]]; then
 	os_version=$(grep -oE '[0-9]+' /etc/debian_version | head -1)
-	[[ "$os_version" -lt 9 ]] && {
+    [[ "$os_version" -lt 9 ]] && {
         echo -e "${RED}[x] VERSAO DO DEBIAN INCOMPATIVEL !\n${YELLOW}[!] REQUER DEBIAN 9 OU SUPERIOR !${SCOLOR}"
         exit 1
-    }
-    [[ "$os_version" == 9 ]] && {
-        echo -e "${RED}[!] ATENCAO O ${SCOLOR}DEBIAN 9 STRETCH${RED} CHEGOU\nOFICIALMENTE AO SEU FIM DE VIDA UTIL ! ${SCOLOR}\n"
-        echo -e "${YELLOW}VOCE PODE TENTAR ATUALIZAR PARA VERSAO\nDEBIAN 10 [ POR SUA CONTA E RISCO ]${SCOLOR}"
-        read -p "$(echo -e ${YELLOW}DESEJA  ATUALIZAR ? [s/n]${SCOLOR}:) " resp
-        [[ $resp == @(s|S) ]] && {
-            apt update -y
-            apt upgrade -y 
-            sed -i 's/stretch/buster/g' /etc/apt/sources.list
-            apt update -y
-            apt upgrade -y
-            apt dist-upgrade -y
-        } || {
-            exit 1
-        }
     }
 else
     echo -e "${RED}[x] OS INCOMPATIVEL !\n${YELLOW}[!] REQUER DISTROS BASE DEBIAN/UBUNTU !${SCOLOR}"
@@ -76,4 +60,4 @@ sysctl -p -f /etc/sysctl.d/70-disable-ipv6.conf
 
 # - Execulta instalador
 [[ -e Plus ]] && rm Plus
-wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/Plus && chmod 777 Plus && ./Plus
+wget raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/script/${arch}/Plus && chmod 777 Plus && ./Plus
