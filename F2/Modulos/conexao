@@ -1498,7 +1498,7 @@ exit 0' >$RCLOCAL
 		echo -ne "  \033[1;31m╠═══⟩⟩"
 			tput civis
 			echo -ne "@Rafaelssh" | lolcat
-			read -p "$(echo -e "  \033[1;31m╚═════❪\033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m: ")" resposta
+			read -p "$(echo -e "  \033[1;31m╚═════❪\033[1;32mHOJE VAMO DE\033[1;33m\033[1;31m\033[1;37m: ")" resposta
 		if [[ "$resposta" = '1' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
