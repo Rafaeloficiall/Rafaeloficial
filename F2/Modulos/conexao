@@ -1626,10 +1626,11 @@ exit 0' >$RCLOCAL
 
 
 
-elif [[ "$resposta" = '4' ]]; then
-			if ps x | grep -w antcrashvpn5.sh | grep -v grep 1>/dev/null 2>/dev/null; then
-				clear
-				echo -e "\E[41;1;37m            WEBSOCKET SECURITY             \E[0m"
+elif [[ "$resposta" = '3' ]]; then
+		clear
+		if ps x | grep -w WebSocket | grep -v grep 1>/dev/null 2>/dev/null; then
+		figlet '' | lolcat
+		echo -e "\E[41;1;37m            WEBSOCKET SECURITY             \E[0m"
 				echo ""
 				fun_socksoff() {
 					for pidproxy in $(screen -ls | grep ".proxy4" | awk {'print $1'}); do
@@ -1658,6 +1659,9 @@ elif [[ "$resposta" = '4' ]]; then
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
+					sleep 3
+					clear
+					fun_conexao
 					sleep 3
 					clear
 					fun_conexao
