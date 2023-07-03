@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@Rafaelssh 
+#	@rafaelssh 
 #====================================================
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
@@ -1497,8 +1497,8 @@ exit 0' >$RCLOCAL
 		echo -e "\033[01;31m╚═╦══════════════════════════════╝\033[0m"
 		echo -ne "  \033[1;31m╠═══⟩⟩"
 			tput civis
-			echo -ne "@Rafaelssh" | lolcat
-			read -p "$(echo -e "  \033[1;31m╚═════❪\033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m: ")" resposta
+			echo -ne "@scottssh" | lolcat
+			read -p "$(echo -e "  \033[1;31m╚═════❪\033[1;32mHOJE VAMO DE\033[1;33m\033[1;31m\033[1;37m: ")" resposta
 		if [[ "$resposta" = '1' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
@@ -1629,7 +1629,7 @@ exit 0' >$RCLOCAL
 elif [[ "$resposta" = '3' ]]; then
 		clear
 		if ps x | grep -w WebSocket | grep -v grep 1>/dev/null 2>/dev/null; then
-		figlet '' | lolcat
+		figlet 'SCOTT-PRO' | lolcat
 		echo -e "\E[41;1;37m       🚀   WEBSOCKET SECURITY   🚀           \E[0m"
 				echo ""
 				fun_wsswsocksoff() { 
@@ -1651,7 +1651,7 @@ elif [[ "$resposta" = '3' ]]; then
 				
 				fun_socks
 			else
-			figlet '' | lolcat
+			figlet 'SCOTT-PRO' | lolcat
 		echo -e "\E[44;1;37m       🚀   WEBSOCKET SECURITY   🚀           \E[0m"
 				echo ""
 				echo "$(echo -e "\033[1;32mPORTA UTILIZADA 80 \033[1;37m")"
@@ -2121,7 +2121,7 @@ elif [[ "$resposta" = '3' ]]; then
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			figlet '' | lolcat
+			figlet 'SCOTT-PRO' | lolcat
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
