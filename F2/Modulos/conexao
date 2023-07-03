@@ -508,7 +508,7 @@ pipeline_prefetch off" >>$var_sqd
 				rm -rf stunnel.conf
 				rm -rf cert.pem
 				rm -rf key.pem
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/cert
+				wget wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/cert
 				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/key
 				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/stunnel
 				mv cert cert.pem
@@ -589,7 +589,7 @@ pipeline_prefetch off" >>$var_sqd
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/cert
+				wget wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/cert
 				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/key
 				wget https://raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/F2/install/stunnel
 				mv cert cert.pem
