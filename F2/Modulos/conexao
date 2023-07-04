@@ -2179,10 +2179,10 @@ echo -e "\033[01;31m\033[1;31m\033[5;34;47m                   ★  CONEXAO  ★ 
 			}
 			
 			[[ "$(netstat -tlpn | grep 'WebSocket86' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mWEB SECURITY \033[1;32mPORTA: \033[1;37m$(echo "$portasucury")"
-				sts4="\033[1;32m◉ "
+				echo -e "\033[1;32mSERVICO: \033[1;33mWEB SECURITY \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'WebSocket86' | awk {'print $4'} | xargs)"
+				sts8="\033[1;32m◉ "
 			} || {
-				sts4="\033[1;31m○ "
+				sts8="\033[1;31m○ "
 			}
 			
 			[[ -e "/etc/stunnel/stunnel.conf" ]] && {
