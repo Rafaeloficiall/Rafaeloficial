@@ -55,6 +55,18 @@ SCOLOR='\033[0m'
 		done
 	}
 
+	slow_setup() {
+		[[ -e "/bin/slowdns" ]] && {
+			slowdns
+		} || {
+			cd $HOME
+			wget https://raw.githubusercontent.com/kiritosshxd/SSHPLUS/main/Slowdns/install -o /dev/null
+			chmod 777 install
+			./install
+		}
+
+	}
+
 	inst_sqd() {
 		if netstat -nltp | grep 'squid' 1>/dev/null 2>/dev/null; then
 			echo -e "\E[41;1;37m            REMOVER SQUID PROXY              \E[0m"
@@ -1221,7 +1233,7 @@ SCOLOR='\033[0m'
 			echo -e "\033[1;33mRESPONDA AS QUESTOES PARA INICIAR A INSTALACAO"
 			echo ""
 			echo -ne "\033[1;32mPARA CONTINUAR CONFIRME SEU IP: \033[1;37m"
-			read -e -i $IP IP
+			read -e -i "$(curl -s ipv4.icanhazip.com)"
 			[[ -z "$IP" ]] && {
 				echo ""
 				echo -e "\033[1;31mIP invalido!"
@@ -1438,14 +1450,14 @@ exit 0' >$RCLOCAL
 			fi
 			[[ $(grep -wc 'open.py' /etc/autostart) != '0' ]] && pt_proxy=$(grep -w 'open.py' /etc/autostart| cut -d' ' -f6) || pt_proxy=80
 			cat <<-EOF >/etc/openvpn/client-common.txt
-				# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
+				# OVPN_ACCESS_SERVER_PROFILE=[@Rafaelssh]
 				client
 				dev tun
 				proto $PROTOCOL
 				sndbuf 0
 				rcvbuf 0
-				remote /SSHPLUS? $porta
-				#payload "HTTP/1.1 [lf]CONNECT HTTP/1.1[lf][lf]|[lf]."
+				remote $IP $porta
+				#payload "HTTP/1.1 [lf]CONNECT HTTP/1.1[lf][lf]|[lf]"
 				http-proxy $IP $pt_proxy
 				resolv-retry 5
 				nobind
@@ -1462,7 +1474,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "SSHPLUS"
+			newclient ""
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
@@ -1479,8 +1491,8 @@ exit 0' >$RCLOCAL
 
 	fun_socks() {
 		clear
+		figlet '' | lolcat
 		echo -e "\E[44;1;37m            GERENCIAR PROXY SOCKS             \E[0m"
-		echo ""
 		[[ $(netstat -nplt | grep -wc 'python') != '0' ]] && {
 			sks='\033[1;32mON'
 			echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
@@ -1488,29 +1500,32 @@ exit 0' >$RCLOCAL
 			sks='\033[1;31mOFF'
 		}
 		[[ $(screen -list | grep -wc 'proxy') != '0' ]] && var_sks1="\033[1;32m◉" || var_sks1="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'proxy2') != '0' ]] && sksop="\033[1;32m◉" || sksop="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'proxy3') != '0' ]] && wspro="\033[1;32m◉" || wspro="\033[1;31m○"
-		[[ $(screen -list | grep -wc 'proxy4') != '0' ]] && wssecu="\033[1;32m◉" || wssecu="\033[1;31m○"
+		[[ $(screen -list | grep -wc 'ws') != '0' ]] && var_sks2="\033[1;32m◉" || var_sks2="\033[1;31m○"
+		[[ $(screen -list | grep -wc 'novoWS') != '0' ]] && var_sks3="\033[1;32m◉" || var_sks3="\033[1;31m○"
+		[[ $(screen -list | grep -wc 'openpy') != '0' ]] && sksop="\033[1;32m◉" || sksop="\033[1;31m○"
 		echo ""
 		echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m"
-		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSOCKS OVPN $sksop \033[0m"
-		echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mSOCKS WEBSOCKET $wspro \033[0m"
-		echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET SECURITY $wssecu \033[0m"
+		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET $var_sks2 \033[0m"
+		echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET SECURITY $var_sks3 \033[0m"
+		echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m"
+		echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m"
+		echo -e "\033[1;31m[\033[1;36m6\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS SOCKS SSH\033[0m"
+        echo -e "\033[1;31m[\033[1;36m7\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS WEBSOCKET\033[0m"
 		echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
 		echo ""
 		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
 		read resposta
 		if [[ "$resposta" = '1' ]]; then
-			if ps x | grep -w antcrashvpn2.sh | grep -v grep 1>/dev/null 2>/dev/null; then
+			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				echo -e "\E[41;1;37m             PROXY SOCKS              \E[0m"
 				echo ""
 				fun_socksoff() {
 					for pidproxy in $(screen -ls | grep ".proxy" | awk {'print $1'}); do
-						screen -X -S "$pidproxy" kill
+						screen -r -S "$pidproxy" -X quit
 					done
-					[[ $(grep -wc "antcrashvpn2.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn2.sh/d' /etc/autostart
+					[[ $(grep -wc "proxy.py" /etc/autostart) != '0' ]] && {
+						sed -i '/proxy.py/d' /etc/autostart
 					}
 					sleep 1
 					screen -wipe >/dev/null
@@ -1538,12 +1553,12 @@ exit 0' >$RCLOCAL
 				verif_ptrs $porta
 				fun_inisocks() {
 					sleep 1
-					screen -dmS proxy antcrashvpn2.sh "$porta"
-					[[ $(grep -wc "antcrashvpn2.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antcrashvpn2.sh $porta" >>/etc/autostart
+					screen -dmS proxy python /etc/SSHPlus/proxy.py $porta
+					[[ $(grep -wc "proxy.py" /etc/autostart) = '0' ]] && {
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || {  screen -r -S 'proxy' -X quit;  screen -dmS proxy python /etc/SSHPlus/proxy.py $porta; }" >>/etc/autostart
 					} || {
-						sed -i '/antcrashvpn2.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antcrashvpn2.sh $porta" >>/etc/autostart
+						sed -i '/proxy.py/d' /etc/autostart
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || {  screen -r -S 'proxy' -X quit;  screen -dmS proxy python /etc/SSHPlus/proxy.py $porta; }" >>/etc/autostart
 					}
 				}
 				echo ""
@@ -1555,172 +1570,136 @@ exit 0' >$RCLOCAL
 				sleep 3
 				fun_socks
 			fi
-		elif [[ "$resposta" = '2' ]]; then
-			if ps x | grep -w antcrashvpn3.sh | grep -v grep 1>/dev/null 2>/dev/null; then
+
+
+
+        elif [[ "$resposta" = '2' ]]; then
+			if ps x | grep -w wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
-				echo -e "\E[41;1;37m            SOCKS OPENVPN + ANTCRASH             \E[0m"
+				figlet '' | lolcat
+				echo -e "\E[41;1;37m             WEBSOCKET              \E[0m"
 				echo ""
-				fun_socksopenoff() {
-					for pidproxy in $(screen -list | grep -w "proxy2" | awk {'print $1'}); do
+				fun_wssocksoff() {
+					for pidproxy in $(screen -ls | grep ".ws" | awk {'print $1'}); do
 						screen -r -S "$pidproxy" -X quit
 					done
-					[[ $(grep -wc "antcrashvpn3.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn3.sh/d' /etc/autostart
+					[[ $(grep -wc "wsproxy.py" /etc/autostart) != '0' ]] && {
+						sed -i '/wsproxy.py/d' /etc/autostart
 					}
 					sleep 1
 					screen -wipe >/dev/null
 				}
-				echo -e "\033[1;32mDESATIVANDO O SOCKS OPEN\033[1;33m"
+				echo -e "\033[1;32mDESATIVANDO O WEBSOCKET\033[1;33m"
 				echo ""
-				fun_bar 'fun_socksopenoff'
+				fun_bar 'fun_wssocksoff'
 				echo ""
-				echo -e "\033[1;32mSOCKS DESATIVADO COM SUCESSO!\033[1;33m"
-				sleep 2
+				echo -e "\033[1;32mWEBSOCKET DESATIVADO COM SUCESSO!\033[1;33m"
+				sleep 3
 				fun_socks
 			else
 				clear
-				echo -e "\E[41;1;37m            SOCKS OPENVPN  + ANTCRASH           \E[0m"
+				figlet '' | lolcat
+				echo -e "\E[44;1;37m             WEBSOCKET              \E[0m"
 				echo ""
 				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
 				read porta
 				[[ -z "$porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
-					sleep 2
+					sleep 3
 					clear
 					fun_conexao
 				}
 				verif_ptrs $porta
-				fun_inisocksop() {
-					screen -dmS proxy2 antcrashvpn3.sh "$porta"
-					[[ $(grep -wc "antcrashvpn3.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antcrashvpn3.sh $porta" >>/etc/autostart
+				fun_iniwssocks() {
+					sleep 1
+					screen -dmS ws python /etc/SSHPlus/wsproxy.py $porta
+					[[ $(grep -wc "wsproxy.py" /etc/autostart) = '0' ]] && {
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || {  screen -r -S 'ws' -X quit;  screen -dmS ws python /etc/SSHPlus/wsproxy.py $porta; }" >>/etc/autostart
 					} || {
-						sed -i '/antcrashvpn3.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antcrashvpn3.sh $porta" >>/etc/autostart
+						sed -i '/wsproxy.py/d' /etc/autostart
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || {  screen -r -S 'ws' -X quit;  screen -dmS ws python /etc/SSHPlus/wsproxy.py $porta; }" >>/etc/autostart
 					}
 				}
 				echo ""
-				echo -e "\033[1;32mINICIANDO O SOCKS OPENVPN + ANTCRASH\033[1;33m"
+				echo -e "\033[1;32mINICIANDO O WEBSOCKET\033[1;33m"
 				echo ""
-				fun_bar 'fun_inisocksop'
+				fun_bar 'fun_iniwssocks'
 				echo ""
-				echo -e "\033[1;32mSOCKS OPENVPN + ANTCRASH ATIVADO COM SUCESSO\033[1;33m"
+				echo -e "\033[1;32WSSOCKS ATIVADO COM SUCESSO\033[1;33m"
 				sleep 3
 				fun_socks
 			fi
-			elif [[ "$resposta" = '3' ]]; then
-			if ps x | grep -w antcrashvpn4.sh | grep -v grep 1>/dev/null 2>/dev/null; then
-				clear
-				echo -e "\E[41;1;37m             PROXY WEBSOCKET             \E[0m"
-				echo ""
-				fun_socksoff() {
-					for pidproxy in $(screen -ls | grep ".proxy3" | awk {'print $1'}); do
-						screen -X -S "$pidproxy" kill
-					done
-					[[ $(grep -wc "antcrashvpn4.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn4.sh/d' /etc/autostart
-					}
-					sleep 1
-					screen -wipe >/dev/null
-				}
-				echo -e "\033[1;32mDESATIVANDO O PROXY WEBSOCKET \033[1;33m"
-				echo ""
-				fun_bar 'fun_socksoff'
-				echo ""
-				echo -e "\033[1;32mPROXY WEBSOCKET  DESATIVADO COM SUCESSO!\033[1;33m"
-				sleep 3
-				fun_socks
-			else
-				clear
-				echo -e "\E[44;1;37m             PROXY WEBSOCKET            \E[0m"
-				echo ""
-				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
-				read porta
-				[[ -z "$porta" ]] && {
-					echo ""
-					echo -e "\033[1;31mPorta invalida!"
-					sleep 3
-					clear
-					fun_conexao
-				}
-				verif_ptrs $porta
-				fun_inisocks() {
-					sleep 1
-					screen -dmS proxy3 antcrashvpn4.sh "$porta"
-					[[ $(grep -wc "antcrashvpn4.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy3 antcrashvpn4.sh $porta" >>/etc/autostart
-					} || {
-						sed -i '/antcrashvpn4.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy3 antcrashvpn4.sh $porta" >>/etc/autostart
-					}
-				}
-				echo ""
-				echo -e "\033[1;32mINICIANDO O PROXY WEBSOCKET \033[1;33m"
-				echo ""
-				fun_bar 'fun_inisocks'
-				echo ""
-				echo -e "\033[1;32mSOCKS ATIVADO COM SUCESSO\033[1;33m"
-				sleep 3
-				fun_socks
-			    fi
 
-        elif [[ "$resposta" = '4' ]]; then
-			if ps x | grep -w antcrashvpn5.sh | grep -v grep 1>/dev/null 2>/dev/null; then
-				clear
-				echo -e "\E[41;1;37m            WEBSOCKET SECURITY             \E[0m"
+
+
+
+
+
+
+
+
+
+
+
+
+
+elif [[ "$resposta" = '3' ]]; then
+		clear
+		if ps x | grep -w WebSocket | grep -v grep 1>/dev/null 2>/dev/null; then
+		figlet '' | lolcat
+		echo -e "\E[41;1;37m        💎 WEBSOCKET SECURITY 💎             \E[0m"
 				echo ""
-				fun_socksoff() {
-					for pidproxy in $(screen -ls | grep ".proxy4" | awk {'print $1'}); do
-						screen -X -S "$pidproxy" kill
+				fun_wsswsocksoff() { 
+					pkill WebSocket
+					for pidproxy in $(screen -ls | grep ".ws" | awk {'print $1'}); do
+						screen -r -S "$WebSocket" -X quit
 					done
-					[[ $(grep -wc "antcrashvpn5.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn5.sh/d' /etc/autostart
+					[[ $(grep -wc "WebSocket" /etc/autostart) != '0' ]] && {
+						sed -i '/WebSocket/d' /etc/autostart
 					}
 					sleep 1
 					screen -wipe >/dev/null
 				}
-				echo -e "\033[1;32mDESATIVANDO O WEBSOCKET SECURITY \033[1;33m"
+				echo -e "\033[1;32mDESATIVANDO O WEBSOCKET SECURITY\033[1;33m"
 				echo ""
-				fun_bar 'fun_socksoff'
+				fun_bar 'fun_wsswsocksoff'
 				echo ""
-				echo -e "\033[1;32mWEBSOCKET SECURITY  DESATIVADO COM SUCESSO!\033[1;33m"
-				sleep 3
-				fun_socks
+				echo -e "\033[1;32mWEBSOCKET SECURITY DESATIVADO COM SUCESSO!\033[1;33m"
 				
+				fun_socks
 			else
-				clear
-				echo -e "\E[44;1;37m             WEBSOCKET SECURITY            \E[0m"
+			figlet '' | lolcat
+		echo -e "\E[44;1;37m         💎 WEBSOCKET SECURITY 💎            \E[0m"
 				echo ""
-				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
-				read porta
-				[[ -z "$porta" ]] && {
+				echo "$(echo -e "\033[1;32mQUAL PORTA QUER UTILIZAR? \033[1;37m")"
+				read -p '★ Digite a porta: ' portasucury
+				[[ -z "portasucury" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
-					sleep 3
-					clear
-					fun_conexao
+					
+				fun_socks
 				}
-				verif_ptrs $porta
-				fun_inisocks2() {
+				verif_ptrs $portasucury
+				fun_iniwssocks() {
 					sleep 1
-					screen -dmS proxy4 antcrashvpn5.sh "$porta"
-					[[ $(grep -wc "antcrashvpn5.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy4 antcrashvpn5.sh $porta" >>/etc/autostart
+					screen -dmS novoWS /etc/SSHPlus/WebSocket
+					[[ $(grep -wc "WebSocket" /etc/autostart) = '0' ]] && {
+						echo -e "netstat -tlpn | grep -w $portasucury > /dev/null || {  screen -r -S 'ws' -X quit;  screen -dmS ws portasucury /etc/SSHPlus/wsproxy.py $portasucury; }" >>/etc/autostart
 					} || {
-						sed -i '/antcrashvpn5.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy4 antcrashvpn5.sh $porta" >>/etc/autostart
+						sed -i '/wsproxy.py/d' /etc/autostart
+						echo -e "netstat -tlpn | grep -w $portasucury > /dev/null || {  screen -r -S 'ws' -X quit;  screen -dmS ws portasucury /etc/SSHPlus/wsproxy.py $portasucury; }" >>/etc/autostart
 					}
 				}
 				echo ""
-				echo -e "\033[1;32mINICIANDO O WEBSOCKET SECURITY \033[1;33m"
+				echo -e "\033[1;32mINICIANDO O WEBSOCKET SECURITY\033[1;33m"
 				echo ""
-				fun_bar 'fun_inisocks2'
+				fun_bar 'fun_iniwssocks'
 				echo ""
-				echo -e "\033[1;32mWEBSOCKET SECURITY ATIVADO COM SUCESSO\033[1;33m"
+				echo -e "\033[1;32mWEBSUCURY Ativado. Bom uso pequeno gafanhoto. ;)\033[1;33m"
 				sleep 3
 				fun_socks
-               fi
+			fi
 
 
 
@@ -2161,113 +2140,143 @@ exit 0' >$RCLOCAL
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			figlet '' | lolcat
+figlet "SCOTT-PRO" | lolcat
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
-echo -e "\033[01;31m╔════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                     💎 CONEXAO 💎                     \033[1;33m \033[0m\033[01;31m║"
-echo -e "\033[01;31m╚════════════════════════════════════════════════════════╝\033[0m"
-			echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
-
-            [[ "$(netstat -tlpn | grep 'WebSocket86' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mWebSocket Security: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'WebSocket86' | awk {'print $4'} | xargs)"
+echo -e "\033[01;31m\033[1;31m\033[5;34;47m                   ★  CONEXAO  ★                   \033[1;33m \033[0m\033[01;31m"
+			echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
+			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts8="\033[1;32m◉ "
 			} || {
 				sts8="\033[1;31m○ "
 			}
-
+			[[ "$(ps x | grep 'slowdns' | grep -v 'grep' | wc -l)" != '0' ]] && {
+				sts9="\033[1;32m◉ "
+			} || {
+				sts9="\033[1;31m○ "
+			}            
 			[[ "$(netstat -tlpn | grep 'sslh' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mSSLH: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'sslh' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts7="\033[1;32m◉ "
 			} || {
 				sts7="\033[1;31m○ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'openvpn' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mOPENVPN: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mOPENVPN: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts5="\033[1;32m◉ "
 			} || {
 				sts5="\033[1;31m○ "
 			}
 
 			[[ "$(netstat -tlpn | grep 'python' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts4="\033[1;32m◉ "
 			} || {
 				sts4="\033[1;31m○ "
 			}
+			
+			[[ "$(netstat -tlpn | grep 'WebSocket' | wc -l)" != '0' ]] && {
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mWEB SECURITY \033[1;32mPORTA: \033[1;37m$(echo "$portasucury")"
+				sts4="\033[1;32m◉ "
+			} || {
+				sts4="\033[1;31m○ "
+			}
+			
 			[[ -e "/etc/stunnel/stunnel.conf" ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSSL TUNNEL \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mSSL TUNNEL \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)"
 				sts3="\033[1;32m◉ "
 			} || {
 				sts3="\033[1;31m○ "
 			}
 			[[ "$(netstat -tlpn | grep 'dropbear' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mDROPBEAR \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mDROPBEAR \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'dropbear' | awk -F ":" {'print $4'} | xargs)"
 				sts2="\033[1;32m◉ "
 			} || {
 				sts2="\033[1;31m○ "
 			}
 			[[ "$(netstat -tlpn | grep 'squid' | wc -l)" != '0' ]] && {
-				echo -e "\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mSQUID \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)"
 				sts1="\033[1;32m◉ "
 			} || {
 				sts1="\033[1;31m○ "
 			}
-			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-			echo ""
-			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mOPENSSH $sts6\033[1;31m
-[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mSQUID PROXY $sts1\033[1;31m
-[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mDROPBEAR $sts2\033[1;31m
-[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mOPENVPN $sts5\033[1;31m
-[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mPROXY SOCKS $sts4 | Security $sts8\033[1;31m
-[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;33mSSL TUNNEL $sts3\033[1;31m
-[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;33mVOLTAR \033[1;32m<\033[1;33m<\033[1;31m< \033[1;31m
-[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mSAIR \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
-			echo ""
-			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-			echo ""
+			[[ "$(netstat -tunlp | grep 'trojan-go' | wc -l)" != '0' ]] && {
+				trojansts="\033[1;32m◉ "
+			} || {
+				trojansts="\033[1;31m○ "
+			}
+			[[ "$(netstat -tunlp | grep 'v2ray' | wc -l)" != '0' ]] && {
+				xv2ray="\033[1;32m◉ "
+			} || {
+				xv2ray="\033[1;31m○ "
+			}
+			echo -e "░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░" | lolcat
+			echo -e "\033[01;31m\033[0m"
+			echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m"
+			echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mWEB SOCKS \033[01;31m $sts4\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSL TUNNEL \033[01;31m $sts3\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 06 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENVPN \033[01;31m $sts5\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 07 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSLH MULTIPLEX \033[01;31m $sts7\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 08 •\033[1;34m]\033[1;37m ➩  \033[1;33mCHISEL \033[01;31m $sts8\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 09 •\033[1;34m]\033[1;37m ➩  \033[1;33mSLOWDNS \033[01;31m $sts9\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 10 •\033[1;34m]\033[1;37m ➩  \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 11 •\033[1;34m]\033[1;37m ➩  \033[1;33mMENU APACHE  \033[0m"
+echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 00 •\033[1;34m]\033[1;37m ➩  \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
+                        echo "                                                    @scottssh" | lolcat
+			echo -e "░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░" | lolcat
 			tput civis
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+			echo -ne "\033[1;31m➤ \033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : ";
 			read x
 			tput cnorm
 			clear
 			case $x in
 			1 | 01)
-				fun_openssh
-				;;
-			2 | 02)
-				fun_squid
-				;;
-			3 | 03)
-				fun_drop
-				;;
+			fun_openssh
+			;;
 			4 | 04)
-				fun_openvpn
-				;;
+			fun_squid
+			;;
 			5 | 05)
-				fun_socks
-				;;
+			fun_drop
+			;;
 			6 | 06)
-				inst_ssl
-				;;
-			99 | 99)
-				fun_sslh
-				;;
+			fun_openvpn
+			;;
+			2 | 02)
+			fun_socks
+			;;
+			3 | 03) 
+			inst_ssl
+			;;
 			7 | 07)
-				menu
-				;;
+			fun_sslh
+			;;
+			8 | 08)
+			fun_chisel
+			;;
+			9 | 9)
+			slow_setup
+			;;
+			10 | 10)
+			trojan-go
+			;;
+			12 | 12)
+			clear
+			apache2menu
+			;;
 			0 | 00)
-				echo -e "\033[1;31mSaindo...\033[0m"
-				sleep 2
-				clear
-				exit
-				;;
+			clear
+			menu
+			;;
 			*)
-				echo -e "\033[1;31mOpcao invalida !\033[0m"
-				sleep 2
-				;;
+			echo -e "\033[1;31mOpcao invalida !\033[0m"
+			sleep 2
+			;;
 			esac
 		done
 	}
