@@ -1,9 +1,9 @@
-# SCOTT PRO ⚡
+# SSH PRO ⚡
 
-# @SCOTTSSH
+# @RAFAEL SSH
 
 *PROJETO EM BETA🍷🗿
 ```
-apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/ScottBrabo/PR0/main/ssh-plus)
+apt install wget -y; bash <(wget -qO- raw.githubusercontent.com/Rafaeloficiall/Rafaeloficial/main/ssh-plus)
 
 ```
