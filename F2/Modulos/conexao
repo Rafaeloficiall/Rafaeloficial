@@ -2140,7 +2140,7 @@ elif [[ "$resposta" = '3' ]]; then
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-figlet "SCOTT-PRO" | lolcat
+figlet "" | lolcat
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
@@ -2179,10 +2179,10 @@ echo -e "\033[01;31m\033[1;31m\033[5;34;47m                   ★  CONEXAO  ★ 
 			}
 			
 			[[ "$(netstat -tlpn | grep 'WebSocket' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mWEB SECURITY \033[1;32mPORTA: \033[1;37m$(echo "$portasucury")"
-				sts4="\033[1;32m◉ "
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mWEB SECURITY \033[1;32mPORTA: \033[1;37m$(echo 'WebSocket86' | awk {'print $4'} | xargs)"
+				sts8="\033[1;32m◉ "
 			} || {
-				sts4="\033[1;31m○ "
+				sts8="\033[1;31m○ "
 			}
 			
 			[[ -e "/etc/stunnel/stunnel.conf" ]] && {
@@ -2227,7 +2227,7 @@ echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 09 •\033[1;34m]\033[1;37m 
 echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 10 •\033[1;34m]\033[1;37m ➩  \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m"
 echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 11 •\033[1;34m]\033[1;37m ➩  \033[1;33mMENU APACHE  \033[0m"
 echo -e "\033[01;31m\033[1;31m\033[1;34m[\033[1;37m 00 •\033[1;34m]\033[1;37m ➩  \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m"
-                        echo "                                                    @scottssh" | lolcat
+                        echo "                                                    @Rafaelssh" | lolcat
 			echo -e "░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░░★░" | lolcat
 			tput civis
 			echo -ne "\033[1;31m➤ \033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : ";
