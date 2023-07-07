@@ -1,0 +1,14 @@
+#!/bin/bash
+clear
+#--------------------------
+# SSH-PLUS
+# CANAL TELEGRAM: @COMPANYOFICIAL
+#--------------------------
+
+# - Atualiza Lista/Pacotes/Sistema
+dpkg --configure -a
+apt update -y && apt upgrade -y
+apt install unzip python3 -y
+
+# - Execulta instalador
+wget https://raw.githubusercontent.com/modderajuda/websocketsecurity/main/F2/Plus && chmod 777 Plus && ./Plus
