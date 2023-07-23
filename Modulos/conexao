@@ -1655,10 +1655,10 @@ elif [[ "$resposta" = '3' ]]; then
 		echo -e "\E[44;1;37m       🚀   WEBSOCKET SECURITY   🚀           \E[0m"
 				echo ""
 				rm -rf /etc/mamalista
-				read -p "$(echo -e "★ \033[1;32mQUAL PORTA MEU MANO? \033[1;37m")" -e -i 80 cuzin
+				read -p "$(echo -e "★ \033[1;32mQUAL PORTA MEU MANO? \033[1;37m")" -e -i cuzin
 				echo "$cuzin" > /etc/mamalista
 				echo ""
-				read -p "$(echo -e "★ \033[1;32mBELEZA, QUAL MENSAGEM QUER? \033[1;37m")" -e -i WebSecurity cuzin2
+				read -p "$(echo -e "★ \033[1;32mBELEZA, QUAL MENSAGEM QUER? \033[1;37m")" -e -i cuzin2
 				rm -rf /etc/mamalista2
 				echo "$cuzin2" > /etc/mamalista2
 				[[ -z "cuzin" ]] && {
