@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@scottssh 
+#	@rafaelssh 
 #====================================================
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
@@ -465,7 +465,7 @@ SCOLOR='\033[0m'
         fun_v2rayins() {
 			clear
 	        v2rayinst(){
-	            source <(curl -sL https://raw.githubusercontent.com/ScottBrabo/PR0/main/Modulos/v2ray)
+	            source <(curl -sL https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/Modulos/v2ray)
                     sleep 6
 	        }
 	        if netstat -tunlp |grep v2ray 1> /dev/null 2> /dev/null; then
@@ -783,9 +783,9 @@ SCOLOR='\033[0m'
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/ScottBrabo/PR0/main/Install/cert
-				wget https://raw.githubusercontent.com/ScottBrabo/PR0/main/Install/key
-				wget https://raw.githubusercontent.com/ScottBrabo/PR0/main/Install/stunnel
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/cert
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/key
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/stunnel
 				mv cert cert.pem
 				mv key key.pem
 				mv stunnel stunnel.conf
