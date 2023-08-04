@@ -1,6 +1,6 @@
 #!/bin/bash
 #====================================================
-#	@rafaelssh 
+#	CYBERSSH 
 #====================================================
 cor1='\033[41;1;37m'
 cor2='\033[44;1;37m'
@@ -281,6 +281,7 @@ SCOLOR='\033[0m'
 	fun_squid() {
 		[[ "$(netstat -nplt | grep -c 'squid')" = "0" ]] && inst_sqd
 		echo -e "\E[44;1;37m          GERENCIAR SQUID PROXY           \E[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 		[[ "$(netstat -nplt | grep -c 'squid')" != "0" ]] && {
 			sqdp=$(netstat -nplt | grep 'squid' | awk -F ":" {'print $4'} | xargs)
 			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$sqdp"
@@ -288,12 +289,12 @@ SCOLOR='\033[0m'
 		} || {
 			VarSqdOn="INSTALAR SQUID PROXY"
 		}
-		echo -e "\n\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33m$VarSqdOn \033[1;31m
-[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mADICIONAR PORTA \033[1;31m
-[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA\033[1;31m
-[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-		echo ""
-		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+		echo -e "\n\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33m$VarSqdOn \033[1;31m
+[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mADICIONAR PORTA \033[1;31m
+[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA\033[1;31m
+[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
 		read x
 		clear
 		case $x in
@@ -328,15 +329,17 @@ SCOLOR='\033[0m'
 			else
 				stats='\033[1;31m○ '
 			fi
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo -e "\E[44;1;37m              GERENCIAR DROPBEAR               \E[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$dpbr"
 			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mLIMITER DROPBEAR $stats\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA DROPBEAR\033[0m"
-			echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mREMOVER DROPBEAR\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mLIMITER DROPBEAR $stats\033[0m"
+			echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA DROPBEAR\033[0m"
+			echo -e "\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mREMOVER DROPBEAR\033[0m"
+			echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+			echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;37m "
 			read resposta
 			if [[ "$resposta" = '1' ]]; then
 				clear
@@ -494,8 +497,9 @@ SCOLOR='\033[0m'
         }
     	fun_chisel() {
 		clear
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 		echo -e "\E[44;1;37m            GERENCIAR CHISEL             \E[0m"
-		echo ""
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 
 
 		[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
@@ -510,11 +514,11 @@ SCOLOR='\033[0m'
 				chiselsts="\033[1;31m○ "
 			}
 		echo ""
-		echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mATIVAR CHISEL $chiselsts \033[0m"
-		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREINICIAR CHISEL\033[0m"
-		echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-		echo ""
-		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+		echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mATIVAR CHISEL $chiselsts \033[0m"
+		echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mREINICIAR CHISEL\033[0m"
+		echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;37m "
 		read resposta
 		if [[ "$resposta" = '1' ]]; then
 			if netstat -nltp | grep 'docker' 1>/dev/null 2>/dev/null; then
@@ -643,13 +647,14 @@ SCOLOR='\033[0m'
 		if netstat -nltp | grep 'stunnel4' 1>/dev/null 2>/dev/null; then
 			[[ $(netstat -nltp | grep 'stunnel4' | wc -l) != '0' ]] && sslt=$(netstat -nplt | grep stunnel4 | awk {'print $4'} | awk -F ":" {'print $2'} | xargs) || sslt="\033[1;31mINDISPONIVEL"
 			echo -e "\E[44;1;37m              GERENCIAR SSL TUNNEL               \E[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo -e "\n\033[1;33mPORTAS\033[1;37m: \033[1;32m$sslt"
 			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA SSL TUNNEL\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER SSL TUNNEL\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA SSL TUNNEL\033[0m"
+			echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mREMOVER SSL TUNNEL\033[0m"
+			echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+			echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;37m "
 			read resposta
 			echo ""
 			[[ "$resposta" = '1' ]] && {
@@ -699,13 +704,15 @@ SCOLOR='\033[0m'
 			}
 		else
 			clear
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo -e "\E[44;1;37m              INSTALAR SSL TUNNEL               \E[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL PADRÃO\033[0m"
+			echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL WEBSOCKET\033[0m"
+			echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
 			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL PADRÃO\033[0m"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mINSTALAR SSL TUNNEL WEBSOCKET\033[0m"
-			echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
-			echo ""
-			echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+			echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;37m "
 			read resposta
 			echo ""
 			if [[ "$resposta" = '1' ]]; then
@@ -783,9 +790,9 @@ SCOLOR='\033[0m'
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/cert
-				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/key
-				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/install/stunnel
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/Install/cert
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/Install/key
+				wget https://raw.githubusercontent.com/Rafaeloficiall/SSHPLUS/main/Install/stunnel
 				mv cert cert.pem
 				mv key key.pem
 				mv stunnel stunnel.conf
@@ -879,18 +886,19 @@ SCOLOR='\033[0m'
 				else
 					mult=$(echo -e "\033[1;31m○ ")
 				fi
+				echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 				echo -e "\E[44;1;37m          GERENCIAR OPENVPN           \E[0m"
-				echo ""
+				echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 				echo -e "\033[1;33mPORTA\033[1;37m: \033[1;32m$opnp"
 				echo ""
-				echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA"
-				echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER OPENVPN"
-				echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mOVPN VIA LINK $ovpnweb"
-				echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mMULTILOGIN OVPN $mult"
-				echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mALTERAR HOST DNS"
-				echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
-				echo ""
-				echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+				echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mALTERAR PORTA"
+				echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mREMOVER OPENVPN"
+				echo -e "\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mOVPN VIA LINK $ovpnweb"
+				echo -e "\033[1;31m[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mMULTILOGIN OVPN $mult"
+				echo -e "\033[1;31m[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mALTERAR HOST DNS"
+				echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
+				echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+				echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
 				read option
 				case $option in
 				1)
@@ -1107,14 +1115,16 @@ SCOLOR='\033[0m'
 					;;
 				5)
 					clear
+					echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 					echo -e "\E[44;1;37m         ALTERAR HOST DNS           \E[0m"
+					echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+					echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mADICIONAR HOST DNS"
+					echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mREMOVER HOST DNS"
+					echo -e "\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mEDITAR MANUALMENTE"
+					echo -e "\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
 					echo ""
-					echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mADICIONAR HOST DNS"
-					echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER HOST DNS"
-					echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mEDITAR MANUALMENTE"
-					echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR"
-					echo ""
-					echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
+					echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+					echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m "
 					read resp
 					[[ -z "$resp" ]] && {
 						echo ""
@@ -1240,18 +1250,18 @@ SCOLOR='\033[0m'
 			echo -e "\033[1;33mVERIFICANDO PORTA..."
 			verif_ptrs $porta
 			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;33mSistema"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;33mGoogle (\033[1;32mRecomendado\033[1;33m)"
-			echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;33mOpenDNS"
-			echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;33mCloudflare"
-			echo -e "\033[1;31m[\033[1;36m5\033[1;31m] \033[1;33mHurricane Electric"
-			echo -e "\033[1;31m[\033[1;36m6\033[1;31m] \033[1;33mVerisign"
-			echo -e "\033[1;31m[\033[1;36m7\033[1;31m] \033[1;33mDNS Performace\033[0m"
+			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;33mSistema"
+			echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;33mGoogle (\033[1;32mRecomendado\033[1;33m)"
+			echo -e "\033[1;31m[\033[1;36m03\033[1;31m] \033[1;33mOpenDNS"
+			echo -e "\033[1;31m[\033[1;36m04\033[1;31m] \033[1;33mCloudflare"
+			echo -e "\033[1;31m[\033[1;36m05\033[1;31m] \033[1;33mHurricane Electric"
+			echo -e "\033[1;31m[\033[1;36m06\033[1;31m] \033[1;33mVerisign"
+			echo -e "\033[1;31m[\033[1;36m07\033[1;31m] \033[1;33mDNS Performace\033[0m"
 			echo ""
 			read -p "$(echo -e "\033[1;32mQUAL DNS DESEJA UTILIZAR? \033[1;37m")" -e -i 2 DNS
 			echo ""
-			echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;33mUDP"
-			echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;33mTCP (\033[1;32mRecomendado\033[1;33m)"
+			echo -e "\033[1;31m[\033[1;36m01\033[1;31m] \033[1;33mUDP"
+			echo -e "\033[1;31m[\033[1;36m02\033[1;31m] \033[1;33mTCP (\033[1;32mRecomendado\033[1;33m)"
 			echo ""
 			read -p "$(echo -e "\033[1;32mQUAL PROTOCOLO DESEJA UTILIZAR NO OPENVPN? \033[1;37m")" -e -i 2 resp
 			if [[ "$resp" = '1' ]]; then
@@ -1287,9 +1297,9 @@ SCOLOR='\033[0m'
 			# Adquirindo easy-rsa
 			echo ""
 			fun_dep() {
-				wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/ScottBrabo/PR0/main/Install/EasyRSA-3.0.1.tgz"
+				wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/Cyber-ssh/sshplus/main/Install/EasyRSA-3.0.1.tgz"
 				[[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
-					wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/ScottBrabo/PR0/main/Install/EasyRSA-3.0.1.tgz"
+					wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/Cyber-ssh/sshplus/main/Install/EasyRSA-3.0.1.tgz"
 				}
 				tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
 				mv ~/EasyRSA-3.0.1/ /etc/openvpn/
@@ -1479,26 +1489,25 @@ exit 0' >$RCLOCAL
 
 	fun_socks() {
 		clear
-		echo -e "\033[01;31m╔════════════════════════════════╗\033[0m"
-		echo -e "\033[01;31m║\033[0m\E[44;1;37m        ★  WEB SOCKS  ★         \E[0m\033[01;31m║\033[0m"
-		echo -e "\033[01;31m╠════════════════════════════════╣\033[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -e "\033[01;31m \033[0m\E[44;1;37m        ★ ★ ★  WEB SOCKS  ★ ★ ★        \E[0m\033[01;31m\033[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 		[[ $(screen -list | grep -wc 'proxy') != '0' ]] && var_sks1="\033[1;32m◉" || var_sks1="\033[1;31m○"
 		[[ $(screen -list | grep -wc 'ws') != '0' ]] && var_sks2="\033[1;32m◉" || var_sks2="\033[1;31m○"
 		[[ $(screen -list | grep -wc 'novoWS') != '0' ]] && var_sks3="\033[1;32m◉" || var_sks3="\033[1;31m○"
 		[[ $(screen -list | grep -wc 'openpy') != '0' ]] && sksop="\033[1;32m◉" || sksop="\033[1;31m○"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m             \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET $var_sks2 \033[0m             \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET SECURITY $var_sks3 \033[0m    \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m         \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m5\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m              \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m6\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS SOCKS SSH\033[0m  \033[01;31m║\033[0m"
-        echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m7\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS WEBSOCKET\033[0m  \033[01;31m║\033[0m"
-		echo -e "\033[01;31m║\033[0m\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                   \033[01;31m ║\033[0m"
-		echo -e "\033[01;31m╚═╦══════════════════════════════╝\033[0m"
-		echo -ne "  \033[1;31m╠═══⟩⟩"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m01\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m             \033[01;31m \033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m02\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET $var_sks2 \033[0m             \033[01;31m \033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m03\033[1;31m] \033[1;37m• \033[1;33mWEBSOCKET SECURITY $var_sks3 \033[0m    \033[01;31m \033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m04\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m         \033[01;31m \033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m05\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m              \033[01;31m \033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m06\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS SOCKS SSH\033[0m  \033[01;31m\033[0m"
+        echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m07\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS WEBSOCKET\033[0m  \033[01;31m\033[0m"
+		echo -e "\033[01;31m \033[0m\033[1;31m[\033[1;36m00\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m                   \033[01;31m \033[0m"
+	    echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -ne "  \033[1;31m"
 			tput civis
-			echo -ne "@rafaelssh" | lolcat
-			read -p "$(echo -e "  \033[1;31m╚═════❪\033[1;32mHOJE VAMO DE\033[1;33m\033[1;31m\033[1;37m: ")" resposta
+			read -p "$(echo -e "  \033[1;31m   \033[1;32m O QUE VOCÊ DESEJA FAZER??\033[1;33m\033[1;31m\033[1;37m: ")" resposta
 		if [[ "$resposta" = '1' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
@@ -1555,8 +1564,6 @@ exit 0' >$RCLOCAL
 				fun_socks
 			fi
 
-
-
         elif [[ "$resposta" = '2' ]]; then
 			if ps x | grep -w wsproxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
@@ -1581,8 +1588,9 @@ exit 0' >$RCLOCAL
 				fun_socks
 			else
 				clear
+				echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 				echo -e "\E[44;1;37m             WEBSOCKET              \E[0m"
-				echo ""
+				echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 				echo -ne "\033[1;32mQUAL PORTA DESEJA ULTILIZAR \033[1;33m?\033[1;37m: "
 				read porta
 				[[ -z "$porta" ]] && {
@@ -1613,24 +1621,12 @@ exit 0' >$RCLOCAL
 				fun_socks
 			fi
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 elif [[ "$resposta" = '3' ]]; then
 		clear
 		if ps x | grep -w WebSocket | grep -v grep 1>/dev/null 2>/dev/null; then
-		figlet '' | lolcat
-		echo -e "\E[41;1;37m       🚀   WEBSOCKET SECURITY   🚀           \E[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -e "\E[41;1;37m            WEBSOCKET SECURITY                \E[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 				echo ""
 				fun_wsswsocksoff() { 
 					pkill WebSocket
@@ -1651,17 +1647,11 @@ elif [[ "$resposta" = '3' ]]; then
 				
 				fun_socks
 			else
-			figlet '' | lolcat
-		echo -e "\E[44;1;37m       🚀   WEBSOCKET SECURITY   🚀           \E[0m"
-				echo ""
-				rm -rf /etc/mamalista
-				read -p "$(echo -e "★ \033[1;32mQUAL PORTA MEU MANO? \033[1;37m")" -e -i 80 cuzin
-				echo "$cuzin" > /etc/mamalista
-				echo ""
-				read -p "$(echo -e "★ \033[1;32mBELEZA, QUAL MENSAGEM QUER? \033[1;37m")" -e -i WebSecurity cuzin2
-				rm -rf /etc/mamalista2
-				echo "$cuzin2" > /etc/mamalista2
-				[[ -z "cuzin" ]] && {
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+		echo -e "\E[44;1;37m           WEBSOCKET SECURITY               \E[0m"
+		echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+				echo "$(echo -e "\033[1;32mPORTA UTILIZADA 80 \033[1;37m")"
+				[[ -z "porta" ]] && {
 					echo ""
 					echo -e "\033[1;31mPorta invalida!"
 					
@@ -1670,12 +1660,12 @@ elif [[ "$resposta" = '3' ]]; then
 				verif_ptrs $porta
 				fun_iniwssocks() {
 					sleep 1
-					screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:$(cat /etc/mamalista) -msg="$(cat /etc/mamalista2) - <span style="color:#bb1cf6">@</span><span style="color:#a438f1">s</span><span style="color:#8c54ed">c</span><span style="color:#7570e8">o</span><span style="color:#5d8ce3">t</span><span style="color:#46a8df">t</span><span style="color:#2ec4da">s</span><span style="color:#17e0d5">s</span><span style="color:#00fdd1">h</span>"
+					screen -dmS novoWS /etc/SSHPlus/WebSocket 
 					[[ $(grep -wc "WebSocket" /etc/autostart) = '0' ]] && {
-						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:$(cat /etc/mamalista) -msg='$(cat /etc/mamalista2) - <span style="color:#bb1cf6">@</span><span style="color:#a438f1">s</span><span style="color:#8c54ed">c</span><span style="color:#7570e8">o</span><span style="color:#5d8ce3">t</span><span style="color:#46a8df">t</span><span style="color:#2ec4da">s</span><span style="color:#17e0d5">s</span><span style="color:#00fdd1">h</span>'" >>/etc/autostart
+						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:80" >>/etc/autostart
 					} || {
 						sed -i '/WebSocket/d' /etc/autostart
-						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:$(cat /etc/mamalista) -msg='$(cat /etc/mamalista2) - <span style="color:#bb1cf6">@</span><span style="color:#a438f1">s</span><span style="color:#8c54ed">c</span><span style="color:#7570e8">o</span><span style="color:#5d8ce3">t</span><span style="color:#46a8df">t</span><span style="color:#2ec4da">s</span><span style="color:#17e0d5">s</span><span style="color:#00fdd1">h</span>'" >>/etc/autostart
+						echo -e "screen -dmS novoWS /etc/SSHPlus/WebSocket -proxy_port 0.0.0.0:80" >>/etc/autostart
 					}
 				}
 				echo ""
@@ -1687,18 +1677,6 @@ elif [[ "$resposta" = '3' ]]; then
 				
 				fun_socks
 			fi
-
-
-
-
-
-
-
-
-
-
-
-
 
 		elif [[ "$resposta" = '4' ]]; then
 			if ps x | grep -w open.py | grep -v grep 1>/dev/null 2>/dev/null; then
@@ -2008,7 +1986,7 @@ elif [[ "$resposta" = '3' ]]; then
 [\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mREMOVER PORTA\033[1;31m
 [\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
 		echo ""
-		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
+		echo -ne "\033[1;32mO QUE VOCÊ DESEJA FAZER \033[1;33m?\033[1;37m "
 		read resp
 		if [[ "$resp" = '1' ]]; then
 			clear
@@ -2127,13 +2105,12 @@ elif [[ "$resposta" = '3' ]]; then
 		while true $x != "ok"; do
 			[[ ! -e '/home/sshplus' ]] && exit 0
 			clear
-			figlet '' | lolcat
 system=$(cat /etc/issue.net)
 date=$(date '+%Y-%m-%d <> %H:%M:%S')
 echo -e "\033[1;37m $system                $date"
-echo -e "\033[01;31m╔════════════════════════════════════════════════════════╗\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[5;34;47m                     💎 CONEXAO 💎                     \033[1;33m \033[0m\033[01;31m║"
-echo -e "\033[01;31m╚════════════════════════════════════════════════════════╝\033[0m"
+echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\033[01;31m \033[1;31m\033[5;34;47m                       CONEXAO                       \033[1;33m \033[0m\033[01;31m"
+echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)\033[01;31m                       \033[0m" && sts6="\033[1;32m◉ "
 			[[ "$(netstat -tlpn | grep 'docker' | wc -l)" != '0' ]] && {
 				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mCHISEL: \033[1;32mPORTA: \033[1;37m$(netstat -nplt | grep 'docker' | awk {'print $4'} | cut -d: -f2 | xargs)\033[01;31m                       \033[0m"
@@ -2167,7 +2144,7 @@ echo -e "\033[01;31m╚═══════════════════
 				sts4="\033[1;31m○ "
 			}
 				[[ "$(netstat -tlpn | grep 'WebSocket' | wc -l)" != '0' ]] && {
-				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mWEBSOCKET SECURITY \033[1;32mPORTA: \033[1;37m"$(cat /etc/mamalista)"\033[01;31m                       \033[0m"
+				echo -e "\033[01;31m\033[1;32mSERVICO: \033[1;33mWEBSOCKET SECURITY \033[1;32mPORTA: \033[1;37m$\033[01;31m                       \033[0m"
 				sts4="\033[1;32m◉ "
 			} || {
 				sts4="\033[1;31m○ "
@@ -2200,25 +2177,25 @@ echo -e "\033[01;31m╚═══════════════════
 			} || {
 				xv2ray="\033[1;31m○ "
 			}
-			echo -e "\033[01;31m╔════════════════════════════════════════════════════════╗\033[0m"
-			echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 01 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENSSH \033[01;31m $sts6\033[0m   \033[01;31m                               ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 02 •\033[1;34m]\033[1;37m ➩  \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m         \033[01;31m                     ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 03 •\033[1;34m]\033[1;37m ➩  \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m          \033[01;31m                       ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 04 •\033[1;34m]\033[1;37m ➩  \033[1;33mOPENVPN \033[01;31m $sts5\033[0m        \033[01;31m                          ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 05 •\033[1;34m]\033[1;37m ➩  \033[1;33mPROXY SOCKS \033[01;31m $sts4\033[0m         \033[01;31m                     ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 06 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSL TUNNEL \033[01;31m $sts3\033[0m       \033[01;31m                        ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 07 •\033[1;34m]\033[1;37m ➩  \033[1;33mSSLH MULTIPLEX \033[01;31m $sts7\033[0m       \033[01;31m                    ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 08 •\033[1;34m]\033[1;37m ➩  \033[1;33mCHISEL \033[01;31m $sts8\033[0m          \033[01;31m                         ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 09 •\033[1;34m]\033[1;37m ➩  \033[1;33mSLOWDNS \033[01;31m $sts9\033[0m      \033[01;31m                            ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 10 •\033[1;34m]\033[1;37m ➩  \033[1;33mV2RAY \033[01;31m $xv2ray\033[0m        \033[01;31m                            ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 11 •\033[1;34m]\033[1;37m ➩  \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m      \033[01;31m                          ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 12 •\033[1;34m]\033[1;37m ➩  \033[1;33mLIMPAR V2RAY \033[01;31m\033[0m         \033[01;31m                       ║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 13 •\033[1;34m]\033[1;37m ➩  \033[1;33mMENU APACHE  \033[0m                                \033[01;31m║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 14 •\033[1;34m]\033[1;37m ➩  \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m                                 \033[01;31m║\033[0m"
-echo -e "\033[01;31m║\033[1;31m\033[1;34m[\033[1;37m 00 •\033[1;34m]\033[1;37m ➩  \033[1;33mSAIR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m                                  \033[01;31m ║\033[0m"
-			echo -e "\033[01;31m╠════════════════════════════════════════════════════════╝\033[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+			echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m01\033[1;34m]\033[1;37m ➩ \033[1;33mOPENSSH \033[01;31m $sts6\033[0m   \033[01;31m                               \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m02\033[1;34m]\033[1;37m ➩ \033[1;33mSQUID PROXY \033[01;31m $sts1\033[0m         \033[01;31m                     \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m03\033[1;34m]\033[1;37m ➩ \033[1;33mDROPBEAR \033[01;31m $sts2\033[0m          \033[01;31m                       \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m04\033[1;34m]\033[1;37m ➩ \033[1;33mOPENVPN \033[01;31m $sts5\033[0m        \033[01;31m                          \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m05\033[1;34m]\033[1;37m ➩ \033[1;33mPROXY SOCKS \033[01;31m $sts4\033[0m         \033[01;31m                     \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m06\033[1;34m]\033[1;37m ➩ \033[1;33mSSL TUNNEL \033[01;31m $sts3\033[0m       \033[01;31m                        \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m07\033[1;34m]\033[1;37m ➩ \033[1;33mSSLH MULTIPLEX \033[01;31m $sts7\033[0m       \033[01;31m                    \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m08\033[1;34m]\033[1;37m ➩ \033[1;33mCHISEL \033[01;31m $sts8\033[0m          \033[01;31m                         \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m09\033[1;34m]\033[1;37m ➩ \033[1;33mSLOWDNS \033[01;31m $sts9\033[0m      \033[01;31m                            \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m10\033[1;34m]\033[1;37m ➩ \033[1;33mV2RAY \033[01;31m $xv2ray\033[0m        \033[01;31m                            \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m11\033[1;34m]\033[1;37m ➩ \033[1;33mTROJAN-GO \033[01;31m $trojansts\033[0m      \033[01;31m                          \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m12\033[1;34m]\033[1;37m ➩ \033[1;33mLIMPAR V2RAY \033[01;31m\033[0m         \033[01;31m                       \033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m13\033[1;34m]\033[1;37m ➩ \033[1;33mMENU APACHE  \033[0m                                \033[01;31m\033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m14\033[1;34m]\033[1;37m ➩ \033[1;33mVOLTAR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m                                 \033[01;31m\033[0m"
+            echo -e "\033[01;31m \033[1;31m\033[1;34m[\033[1;37m00\033[1;34m]\033[1;37m ➩ \033[1;33mSAIR  \033[1;32m<\033[1;33m<\033[1;31m< \033[0m                                  \033[01;31m \033[0m"
+			echo -e "\E[38;5;18m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			tput civis
-			echo -ne "\033[1;31m╚════════❪\033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : ";
+			echo -ne "\033[1;31m  \033[1;32mESCOLHA OPÇÃO DESEJADA\033[1;33m\033[1;31m\033[1;37m : ";
 			read x
 			tput cnorm
 			clear
